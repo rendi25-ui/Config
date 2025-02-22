@@ -1,4 +1,5 @@
-port: 7890
+bismillah
+#port: 7890
 # socks-port: 7891
 # mixed-port: 7890
 redir-port: 9797
