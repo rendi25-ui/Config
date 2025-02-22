@@ -1,0 +1,157 @@
+hosts:
+  'nautica.foolvpn.me': api.zoom.us
+  'bug':
+  - 170.114.46.0
+  - 141.193.213.11
+  - 104.18.18.242
+  - 104.18.12.78
+  - 104.22.22.133
+  - 172.67.23.144
+  - 170.114.52.2
+# 🟡ISAT APP FUN
+  - 104.17.237.25
+  - 104.17.238.25
+  - 104.17.239.25
+  - 104.17.240.25
+  - 104.17.241.25
+  - 104.22.5.240
+  - 172.67.5.14
+  - 104.18.49.163
+  - 104.18.61.93
+  - 162.159.130.11
+  - 162.159.130.11
+# 🟡ISAT GAME
+  - 104.18.56.30
+  - 104.18.62.229
+  - 104.16.16.243
+  - 104.17.255.156
+  - 104.19.185.16
+  - 104.18.3.2
+  - 104.18.2.2
+
+prof: &prof {type: http, size-limit: 13000, interval: 10800, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}, override: {skip-cert-verify: true}}
+      
+global-client-fingerprint: random
+log-level: silent
+routing-mark: 6666
+mode: rule
+port: 7890
+socks-port: 7891
+redir-port: 7892
+tproxy-port: 7893
+ipv6: true
+allow-lan: true
+unified-delay: true
+tcp-concurrent: true
+interface-name: en0
+profile:
+  store-selected: false
+  store-fake-ip: true
+geodata-mode: true
+dns:
+  enable: false
+  prefer-h3: false
+  use-hosts: true
+  use-system-hosts: true
+  respect-rules: true
+  listen: 0.0.0.0:53
+  default-nameserver: [ 1.1.1.2, 1.0.0.2 ]
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fallback: [ system ]
+  proxy-server-nameserver: [ 1.1.1.2, 1.0.0.2 ]
+proxy-groups:
+    - name: UMUM
+      proxies: [ 🇮🇩INDO, 🇸🇬SG-FAST, 😎AKUN-AUTO ]
+      use: [ akun, sg, id ]
+      type: select
+      lazy: true
+    - name: UDP
+      proxies: [ Trojan UDP, PASS ]
+      use: [ udp ]
+      type: select
+      lazy: true
+    - name: porn
+      proxies: [ REJECT, PASS ]
+      type: select
+      lazy: true
+    - name: IKLANWEB
+      proxies: [ REJECT, PASS ]
+      type: select
+      lazy: true
+    - interval: 600
+      name: 🇸🇬SG-FAST
+      use: [ sg ]
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+    - interval: 600
+      name: 🇮🇩INDO
+      use: [ id ]
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+    - interval: 600
+      name: 😎AKUN-AUTO
+      use: [ akun ]
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+    - interval: 600
+      tolerance: 100
+      name: Trojan UDP
+      use: [ udp ]
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+proxy-providers:
+  'sg':
+    url: >-
+      https://nautica.foolvpn.me/api/v1/sub?cc=SG&limit=100&vpn=vless&port=443&domain=bug
+    path: ./SG
+    filter: 'Ocean'
+    <<: *prof
+  'id':
+    url: >-
+      https://nautica.foolvpn.me/api/v1/sub?cc=ID&limit=50&vpn=vless&port=443&domain=bug
+    path: ./ID
+    <<: *prof
+  'akun':
+    type: file
+    path: "./AKUN"
+    override:
+      additional-prefix: "😎AKUN ||"
+    health-check:
+      enable: true
+      url: http://connectivitycheck.gstatic.com/generate_204
+      interval: 300
+  'udp':
+    url: >-
+      https://raw.githubusercontent.com/absurd100/test/main/UDP-bug.yaml.txt
+    path: ./UDP
+    <<: *prof
+
+rule-providers:
+  malware: 
+    type: http 
+    format: text 
+    behavior: domain 
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/malware.txt" 
+    path: ./ruleset/malware.txt
+    interval: 86400
+  phishing: 
+    type: http 
+    format: text 
+    behavior: domain 
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/phishing.txt" 
+    path: ./ruleset/phishing.txt 
+    interval: 86400
+rules:
+- GEOIP,cn,DIRECT
+- RULE-SET,phishing,REJECT
+- RULE-SET,malware,REJECT
+- NETWORK,UDP,UDP
+- GEOSITE,category-porn,porn
+- DST-PORT,123/136/137-139,DIRECT 
+- SRC-PORT,123/136/137-139,DIRECT,udp
+- AND,((NETWORK,UDP),(OR,((DST-PORT,443/80),(GEOSITE,youtube)))),REJECT
+- AND,((OR,((DOMAIN-KEYWORD,instagram),(DOMAIN-KEYWORD,facebook))),(NETWORK,UDP)),REJECT
+- AND,((GEOSITE,category-ads-all),(NOT,((DOMAIN-SUFFIX,+.googlesyndication.com)))),IKLANWEB
+- MATCH,UMUM
