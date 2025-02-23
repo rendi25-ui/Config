@@ -94,7 +94,7 @@ hosts:
   - 104.18.3.2
   - 104.18.2.2
 
-prof: &prof {type: http, size-limit: 15000, interval: 10800, proxy: Trojan UDP, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}, override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}}}
+prof: &prof {type: http, size-limit: 15000, interval: 10800, proxy: Trojan UDP, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}, override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}}}
       
 global-client-fingerprint: random
 log-level: silent
