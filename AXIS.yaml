@@ -212,7 +212,7 @@ proxy-providers:
       interval: 300
   'udp':
     url: >-
-      https://raw.githubusercontent.com/absurd100/test/main/UDP-bug.yaml
+      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
     path: ./UDP
     <<: *prof
 
