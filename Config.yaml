@@ -1,0 +1,126 @@
+prof: &prof {type: http, exclude-filter: Tencent, size-limit: 15000, interval: 10800, proxy: Trojan UDP, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
+      
+global-client-fingerprint: random
+log-level: silent
+routing-mark: 6666
+mode: rule
+port: 7890
+socks-port: 7891
+redir-port: 7892
+tproxy-port: 7893
+ipv6: true
+allow-lan: true
+unified-delay: true
+tcp-concurrent: true
+interface-name: en0
+profile:
+  store-selected: false
+  store-fake-ip: true
+geodata-mode: true
+dns:
+  enable: false
+  prefer-h3: false
+  use-hosts: true
+  use-system-hosts: true
+  respect-rules: true
+  listen: 0.0.0.0:53
+  default-nameserver: [ 1.1.1.2, 1.0.0.2 ]
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fallback: [ system ]
+  proxy-server-nameserver: [ 1.1.1.2, 1.0.0.2 ]
+proxy-groups:
+    - name: UMUM
+      proxies: [ TLS 🔴, NTLS 🟢, 😎AKUN ⚪ ]
+      use: [ tls, ntls, akun ]
+      type: select
+      lazy: true
+    - name: UDP
+      proxies: [ Trojan UDP, PASS ]
+      use: [ udp ]
+      type: select
+      lazy: true
+    - name: porn
+      proxies: [ REJECT, PASS ]
+      type: select
+      lazy: true
+    - name: IKLANWEB
+      proxies: [ REJECT, PASS ]
+      type: select
+      lazy: true
+    - interval: 600
+      name: TLS 🔴
+      use: [ tls ]
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+    - interval: 600
+      name: NTLS 🟢
+      use: [ ntls ]
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+    - interval: 600
+      name: 😎AKUN ⚪
+      use: [ akun ]
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+    - interval: 600
+      tolerance: 100
+      name: Trojan UDP
+      use: [ udp ]
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+proxy-providers:
+  'tls':
+    url: >-
+      https://nautica.foolvpn.me/api/v1/sub?cc=SG&limit=9&vpn=vless&port=443&domain=bug
+    path: ./TLS
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🔴 '}
+    <<: *prof
+  'ntls':
+    url: >-
+      https://nautica.foolvpn.me/api/v1/sub?cc=SG&limit=9&vpn=vless&port=80&domain=bug
+    path: ./NTLS
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🟢 '}
+    <<: *prof
+  'akun':
+    type: file
+    path: "./AKUN"
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '⚪ '}
+    health-check:
+      enable: true
+      url: http://connectivitycheck.gstatic.com/generate_204
+      interval: 300
+  'udp':
+    url: >-
+      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
+    path: ./UDP
+    <<: *prof
+
+rule-providers:
+  malware: 
+    type: http 
+    format: text 
+    behavior: domain 
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/malware.txt" 
+    path: ./ruleset/malware.txt
+    interval: 86400
+  phishing: 
+    type: http 
+    format: text 
+    behavior: domain 
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/phishing.txt" 
+    path: ./ruleset/phishing.txt 
+    interval: 86400
+rules:
+- GEOIP,cn,DIRECT
+- RULE-SET,phishing,REJECT
+- RULE-SET,malware,REJECT
+- NETWORK,UDP,UDP
+- GEOSITE,category-porn,porn
+- DST-PORT,123/136/137-139,DIRECT 
+- SRC-PORT,123/136/137-139,DIRECT,udp
+- AND,((NETWORK,UDP),(OR,((DST-PORT,443/80),(GEOSITE,youtube)))),REJECT
+- AND,((OR,((DOMAIN-KEYWORD,instagram),(DOMAIN-KEYWORD,facebook))),(NETWORK,UDP)),REJECT
+- AND,((GEOSITE,category-ads-all),(NOT,((DOMAIN-SUFFIX,googlesyndication.com)))),IKLANWEB
+- MATCH,UMUM
