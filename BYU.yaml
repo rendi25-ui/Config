@@ -25,7 +25,7 @@ hosts:
   - 104.18.3.2
   - 104.18.2.2
 
-prof: &prof {type: http, exclude-filter: Tencent, size-limit: 15000, interval: 10800, proxy: Trojan UDP, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}, override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}}}
+prof: &prof {type: http, exclude-filter: Tencent, size-limit: 15000, interval: 10800, proxy: Trojan UDP, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
       
 global-client-fingerprint: random
 log-level: silent
@@ -59,8 +59,8 @@ dns:
   proxy-server-nameserver: [ 1.1.1.2, 1.0.0.2 ]
 proxy-groups:
     - name: UMUM
-      proxies: [ TLS, NTLS, 😎AKUN-AUTO ]
-      use: [ akun, tls, ntls ]
+      proxies: [ TLS 🔴, NTLS 🟢, 😎AKUN ⚪ ]
+      use: [ tls, ntls, akun ]
       type: select
       lazy: true
     - name: UDP
@@ -77,17 +77,17 @@ proxy-groups:
       type: select
       lazy: true
     - interval: 600
-      name: TLS
+      name: TLS 🔴
       use: [ tls ]
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - interval: 600
-      name: NTLS
+      name: NTLS 🟢
       use: [ ntls ]
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - interval: 600
-      name: 😎AKUN-AUTO
+      name: 😎AKUN ⚪
       use: [ akun ]
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
@@ -102,17 +102,18 @@ proxy-providers:
     url: >-
       https://nautica.foolvpn.me/api/v1/sub?cc=SG&limit=9&vpn=vless&port=443&domain=bug
     path: ./TLS
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🔴 '}
     <<: *prof
   'ntls':
     url: >-
       https://nautica.foolvpn.me/api/v1/sub?cc=SG&limit=9&vpn=vless&port=80&domain=bug
     path: ./NTLS
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🟢 '}
     <<: *prof
   'akun':
     type: file
     path: "./AKUN"
-    override:
-      additional-prefix: "😎AKUN ||"
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '⚪ '}
     health-check:
       enable: true
       url: http://connectivitycheck.gstatic.com/generate_204
