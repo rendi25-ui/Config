@@ -107,12 +107,12 @@ proxy-groups:
 proxy-providers:
   'tls':
     url: >-
-      https://nautica.foolvpn.me/api/v1/sub?cc=ID&limit=50&vpn=vless&port=443&domain=bug
+      https://nautica.foolvpn.me/api/v1/sub?cc=SG&limit=9&vpn=vless&port=443&domain=bug
     path: ./TLS
     <<: *prof
   'ntls':
     url: >-
-      https://nautica.foolvpn.me/api/v1/sub?cc=ID&limit=50&vpn=vless&port=80&domain=bug
+      https://nautica.foolvpn.me/api/v1/sub?cc=SG&limit=9&vpn=vless&port=80&domain=bug
     path: ./NTLS
     <<: *prof
   'akun':
