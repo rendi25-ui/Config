@@ -141,7 +141,7 @@ proxy-groups:
       type: select
       lazy: true
     - name: UDP
-      proxies: [ Trojan UDP, PASS ]
+      proxies: [ Server UDP, PASS ]
       use: [ udp ]
       type: select
       lazy: true
@@ -170,7 +170,7 @@ proxy-groups:
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - interval: 600
       tolerance: 100
-      name: Trojan UDP
+      name: Server UDP
       use: [ udp ]
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
