@@ -127,7 +127,7 @@ hosts:
   - 104.18.3.2
   - 104.18.2.2
 
-prof: &prof {type: http, exclude-filter: Tencent, size-limit: 15000, interval: 10800, proxy: Trojan UDP, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
+prof: &prof {type: http, exclude-filter: Tencent, size-limit: 15000, interval: 10800, proxy: UDP, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
       
 global-client-fingerprint: random
 log-level: silent
