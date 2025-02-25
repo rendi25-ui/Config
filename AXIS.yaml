@@ -1,6 +1,6 @@
 hosts:
-  'bug': 'www.ongamingo.com'
-  'www.ongamingo.com':
+  'bug': 'wifi.id'
+  'wifi.id':
   - 172.67.20.136
   - 104.22.56.77
   - 104.22.57.77
@@ -203,13 +203,13 @@ proxy-groups:
 proxy-providers:
   'tls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=www.ongamingo.com&limit=9&format=vless&subdomain=www.ongamingo.com
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=wifi.id&limit=9&format=vless&subdomain=wifi.id
     path: ./TLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🔴 '}
     <<: *prof
   'ntls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=www.ongamingo.com&limit=9&format=vless&subdomain=www.ongamingo.com
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=wifi.id&limit=9&format=vless&subdomain=wifi.id
     path: ./NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🟢 '}
     <<: *prof
