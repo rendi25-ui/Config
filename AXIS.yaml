@@ -102,7 +102,7 @@ hosts:
   - 104.18.0.171
   - 104.17.106.89
   - 104.18.0.239
-#  XL OPOK 📘
+#  XL OPOK 
   - 172.64.144.4
   - 104.18.43.252
   - 104.18.40.232
@@ -127,7 +127,7 @@ hosts:
   - 104.18.3.2
   - 104.18.2.2
 
-prof: &prof {type: http, exclude-filter: Tencent, size-limit: 15000, interval: 10800, proxy: UDP, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
+prof: &prof {type: http, exclude-filter: "Tencent | Akari", size-limit: 15000, interval: 10800, proxy: UDP, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
       
 global-client-fingerprint: random
 log-level: silent
@@ -202,13 +202,13 @@ proxy-groups:
 proxy-providers:
   'tls':
     url: >-
-      https://nautica.foolvpn.me/api/v1/sub?cc=SG&limit=9&vpn=vless&port=443&domain=bug
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=9&format=vless
     path: ./TLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🔴 '}
     <<: *prof
   'ntls':
     url: >-
-      https://nautica.foolvpn.me/api/v1/sub?cc=SG&limit=9&vpn=vless&port=80&domain=bug
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=9&format=vless
     path: ./NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🟢 '}
     <<: *prof
