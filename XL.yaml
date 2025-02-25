@@ -158,7 +158,7 @@ hosts:
   - 104.18.3.2
   - 104.18.2.2
 
-prof: &prof {type: http, exclude-filter: Tencent, size-limit: 15000, interval: 10800, proxy: UDP, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
+prof: &prof {type: http, exclude-filter: "Tencent | Akari", size-limit: 15000, interval: 10800, proxy: UDP, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
       
 global-client-fingerprint: random
 log-level: silent
@@ -233,13 +233,13 @@ proxy-groups:
 proxy-providers:
   'tls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&subdomain=www.udemy.com&limit=9&format=vless
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=9&format=vless
     path: ./TLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🔴 '}
     <<: *prof
   'ntls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&subdomain=www.udemy.com&limit=9&format=vless
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=9&format=vless
     path: ./NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🟢 '}
     <<: *prof
