@@ -1,6 +1,6 @@
 hosts:
-  'nuclear.biz.id': api.zoom.us
-  'bug':
+  'bug': 'api.zoom.us'
+  'api.zoom.us':
   - 172.67.20.136
   - 104.22.56.77
   - 104.22.57.77
@@ -107,13 +107,13 @@ proxy-groups:
 proxy-providers:
   'tls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=9&format=vless
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=api.zoom.us&limit=9&format=vless&subdomain=api.zoom.us
     path: ./TLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🔴 '}
     <<: *prof
   'ntls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=9&format=vless
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=api.zoom.us&limit=9&format=vless&subdomain=api.zoom.us
     path: ./NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🟢 '}
     <<: *prof
