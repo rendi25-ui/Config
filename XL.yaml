@@ -172,18 +172,17 @@ profile:
   store-fake-ip: true
 geodata-mode: true
 dns:
-  enable: false
+  enable: true
   prefer-h3: false
   use-hosts: true
   use-system-hosts: true
   respect-rules: true
   listen: 0.0.0.0:53
-  default-nameserver: [ 1.1.1.2, 1.0.0.2 ]
   ipv6: true
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
-  fallback: [ system ]
-  proxy-server-nameserver: [ 1.1.1.2, 1.0.0.2 ]
+  fallback: [ 'system', 1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4 ]
+  proxy-server-nameserver: [ 'system', 1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4 ]
 proxy-groups:
     - name: UMUM
       proxies: [ TLS 🔴, NTLS 🟢, 😎AKUN ⚪ ]
@@ -268,7 +267,8 @@ rule-providers:
     path: ./ruleset/phishing.txt 
     interval: 86400
 rules:
-- GEOIP,cn,DIRECT
+- IP-CIDR,127.0.0.0/8,DIRECT
+- IP-CIDR,122.122.0.0/8,DIRECT,no-resolve
 - RULE-SET,phishing,REJECT
 - RULE-SET,malware,REJECT
 - NETWORK,UDP,UDP
