@@ -248,7 +248,7 @@ proxy-providers:
     url: >-
       https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=ava.game.naver.com&limit=2&format=vless&subdomain=ava.game.naver.com
     path: ./ava
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'vidio '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ava '}
     <<: *prof
   'akun':
     type: file
