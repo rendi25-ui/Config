@@ -54,13 +54,6 @@ proxy-groups:
       exclude-filter: UDP
       type: select
       lazy: true
-    - name: AUTO
-      include-all-providers: true
-      exclude-filter: UDP
-      type: url-test
-      url: 'http://connectivitycheck.gstatic.com/generate_204'
-      interval: 600
-      lazy: true
     - name: UDP
       proxies: [ Server UDP, PASS ]
       use: [ udp ]
@@ -79,6 +72,13 @@ proxy-groups:
       use: [ akun ]
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
+    - name: AUTO
+      include-all-providers: true
+      exclude-filter: UDP
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+      interval: 600
+      lazy: true
     - interval: 600
       tolerance: 100
       name: Server UDP
