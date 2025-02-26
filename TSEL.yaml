@@ -1,6 +1,6 @@
 hosts:
-  'bug': 'bakrie.ac.id'
-  'bakrie.ac.id':
+  'bug': '+.ac.id'
+  '+.ac.id':
   - 172.67.20.136
   - 104.22.56.77
   - 104.22.57.77
