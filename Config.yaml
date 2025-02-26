@@ -1,4 +1,4 @@
-prof: &prof {type: http, exclude-filter: "Technology | Tencent | Akari | HIVELOCITY, | (US)", size-limit: 15000, interval: 10800, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
+prof: &prof {type: http, size-limit: 15000, interval: 10800, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
       
 global-client-fingerprint: random
 log-level: silent
@@ -31,8 +31,9 @@ dns:
   proxy-server-nameserver: [ 'system', 1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4 ]
 proxy-groups:
     - name: UMUM
-      proxies: [ TLS 🔴, NTLS 🟢, 😎AKUN ⚪ ]
-      use: [ tls, ntls, akun ]
+      proxies: [ AUTO ]
+      include-all-providers: true
+      exclude-filter: UDP
       type: select
       lazy: true
     - name: UDP
@@ -49,16 +50,6 @@ proxy-groups:
       type: select
       lazy: true
     - interval: 600
-      name: TLS 🔴
-      use: [ tls ]
-      type: url-test
-      url: 'http://connectivitycheck.gstatic.com/generate_204'
-    - interval: 600
-      name: NTLS 🟢
-      use: [ ntls ]
-      type: url-test
-      url: 'http://connectivitycheck.gstatic.com/generate_204'
-    - interval: 600
       name: 😎AKUN ⚪
       use: [ akun ]
       type: url-test
@@ -69,18 +60,31 @@ proxy-groups:
       use: [ udp ]
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
+    - name: AUTO
+      include-all-providers: true
+      exclude-filter: UDP
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+      interval: 600
+      lazy: true
 proxy-providers:
-  'tls':
+  'umum ntls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=quiz.vidio.com&limit=9&format=vless&subdomain=quiz.vidio.com
-    path: ./TLS
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🔴 '}
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=2&format=vless&subdomain=bakrie.ac.id
+    path: ./ntls
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum ntls'}
     <<: *prof
-  'ntls':
+  'umum tls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=quiz.vidio.com&limit=9&format=vless&subdomain=quiz.vidio.com
-    path: ./NTLS
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🟢 '}
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=2&format=vless&subdomain=bakrie.ac.id
+    path: ./tls
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum tls'}
+    <<: *prof
+  'ilped':
+    url: >-
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bakrie.ac.id&limit=2&format=vless&subdomain=bakrie.ac.id
+    path: ./ilped
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ilped '}
     <<: *prof
   'akun':
     type: file
