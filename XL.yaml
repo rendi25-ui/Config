@@ -1,6 +1,6 @@
 hosts:
-  'bug': 'quiz.vidio.com'
-  'quiz.vidio.com':
+  'bug': '+.vidio.com'
+  '+.vidio.com':
   - 172.67.20.136
   - 104.22.56.77
   - 104.22.57.77
