@@ -104,13 +104,13 @@ proxy-providers:
     url: >-
       https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=5&format=vless&subdomain=bakrie.ac.id
     path: ./ntls
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum ntls'}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum ntls '}
     <<: *prof
   'umum tls':
     url: >-
       https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=5&format=vless&subdomain=bakrie.ac.id
     path: ./tls
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum tls'}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum tls '}
     <<: *prof
   'zoom':
     url: >-
