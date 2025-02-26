@@ -175,13 +175,13 @@ proxy-groups:
 proxy-providers:
   'tls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=quiz.vidio.com&limit=9&format=vless&subdomain=quiz.vidio.com
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bakrie.ac.id&limit=9&format=vless&subdomain=bakrie.ac.id
     path: ./TLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🔴 '}
     <<: *prof
   'ntls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=quiz.vidio.com&limit=9&format=vless&subdomain=quiz.vidio.com
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bakrie.ac.id&limit=9&format=vless&subdomain=bakrie.ac.id
     path: ./NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '🟢 '}
     <<: *prof
