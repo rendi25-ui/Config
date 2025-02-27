@@ -117,6 +117,12 @@ proxy-providers:
     path: ./tls
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum tls '}
     <<: *prof
+  'space':
+    url: >-
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=space.byu.id&limit=5&format=vless&subdomain=space.byu.id
+    path: ./space
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'space '}
+    <<: *prof
   'akun':
     type: file
     path: "./AKUN"
