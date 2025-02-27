@@ -254,6 +254,12 @@ proxy-providers:
     path: ./ava
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ava '}
     <<: *prof
+  'viu':
+    url: >-
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=help.viu.com&limit=2&format=vless&subdomain=help.viu.com
+    path: ./viu
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'viu '}
+    <<: *prof
   'akun':
     type: file
     path: "./AKUN"
