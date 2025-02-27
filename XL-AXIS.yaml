@@ -202,11 +202,6 @@ proxy-groups:
       type: select
       lazy: true
     - interval: 600
-      name: 😎AKUN ⚪
-      use: [ akun ]
-      type: url-test
-      url: 'http://connectivitycheck.gstatic.com/generate_204'
-    - interval: 600
       tolerance: 100
       name: Server UDP
       use: [ udp ]
@@ -232,38 +227,38 @@ proxy-groups:
 proxy-providers:
   'umum ntls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=5&format=vless&subdomain=bakrie.ac.id
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=3&format=vless&subdomain=bakrie.ac.id
     path: ./ntls
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum ntls '}
     <<: *prof
   'umum tls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=5&format=vless&subdomain=bakrie.ac.id
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=3&format=vless&subdomain=bakrie.ac.id
     path: ./tls
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum tls '}
     <<: *prof
   'vidio':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=quiz.vidio.com&limit=2&format=vless&subdomain=quiz.vidio.com
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=quiz.vidio.com&limit=3&format=vless&subdomain=quiz.vidio.com
     path: ./vidio
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'vidio '}
     <<: *prof
   'ava':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=ava.game.naver.com&limit=2&format=vless&subdomain=ava.game.naver.com
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=ava.game.naver.com&limit=3&format=vless&subdomain=ava.game.naver.com
     path: ./ava
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ava '}
     <<: *prof
   'viu':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=help.viu.com&limit=2&format=vless&subdomain=help.viu.com
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=help.viu.com&limit=3&format=vless&subdomain=help.viu.com
     path: ./viu
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'viu '}
     <<: *prof
   'akun':
     type: file
     path: "./AKUN"
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '⚪ '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'x-akun '}
     health-check:
       enable: true
       url: http://connectivitycheck.gstatic.com/generate_204
