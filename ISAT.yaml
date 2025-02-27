@@ -63,7 +63,7 @@ dns:
   proxy-server-nameserver: [ 'system', 1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4 ]
 proxy-groups:
     - name: UMUM
-      proxies: [ AUTO ]
+      proxies: [ ALL wc+nwc, NO-WC (tls), NO-WC (ntls) ]
       include-all-providers: true
       exclude-filter: UDP
       type: select
@@ -86,7 +86,13 @@ proxy-groups:
       use: [ akun ]
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
-    - name: AUTO
+    - interval: 600
+      tolerance: 100
+      name: Server UDP
+      use: [ udp ]
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+    - name: ALL wc+nwc
       include-all-providers: true
       exclude-filter: UDP
       type: url-test
@@ -94,9 +100,13 @@ proxy-groups:
       interval: 600
       lazy: true
     - interval: 600
-      tolerance: 100
-      name: Server UDP
-      use: [ udp ]
+      name: NO-WC (tls)
+      use: [ umum tls ]
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+    - interval: 600
+      name: NO-WC (ntls)
+      use: [ umum ntls ]
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
 proxy-providers:
@@ -112,11 +122,11 @@ proxy-providers:
     path: ./tls
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum tls '}
     <<: *prof
-  'zoom':
+  'ilped':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=api.zoom.us&limit=2&format=vless&subdomain=api.zoom.us
-    path: ./zoom
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'zoom '}
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bakrie.ac.id&limit=2&format=vless&subdomain=bakrie.ac.id
+    path: ./ilped
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ilped '}
     <<: *prof
   'akun':
     type: file
