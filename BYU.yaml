@@ -119,7 +119,7 @@ proxy-providers:
     <<: *prof
   'space':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=space.byu.id&limit=5&format=vless&subdomain=space.byu.id
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=space.byu.id&limit=2&format=vless&subdomain=space.byu.id
     path: ./space
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'space '}
     <<: *prof
