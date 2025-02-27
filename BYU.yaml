@@ -126,7 +126,7 @@ proxy-providers:
   'akun':
     type: file
     path: "./AKUN"
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '⚪ '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'x-akun '}
     health-check:
       enable: true
       url: http://connectivitycheck.gstatic.com/generate_204
