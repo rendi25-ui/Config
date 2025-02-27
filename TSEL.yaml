@@ -193,7 +193,7 @@ proxy-providers:
     url: >-
       https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bakrie.ac.id&limit=3&format=vless&subdomain=bakrie.ac.id
     path: ./ilped
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ilped '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ilped1 '}
     <<: *prof
   'ilped2':
     url: >-
