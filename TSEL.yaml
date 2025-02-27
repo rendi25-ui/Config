@@ -153,11 +153,6 @@ proxy-groups:
       type: select
       lazy: true
     - interval: 600
-      name: 😎AKUN ⚪
-      use: [ akun ]
-      type: url-test
-      url: 'http://connectivitycheck.gstatic.com/generate_204'
-    - interval: 600
       tolerance: 100
       name: Server UDP
       use: [ udp ]
@@ -183,32 +178,32 @@ proxy-groups:
 proxy-providers:
   'umum ntls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=5&format=vless&subdomain=bakrie.ac.id
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=3&format=vless&subdomain=bakrie.ac.id
     path: ./ntls
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum ntls '}
     <<: *prof
   'umum tls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=5&format=vless&subdomain=bakrie.ac.id
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=3&format=vless&subdomain=bakrie.ac.id
     path: ./tls
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum tls '}
     <<: *prof
   'ilped':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bakrie.ac.id&limit=2&format=vless&subdomain=bakrie.ac.id
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bakrie.ac.id&limit=3&format=vless&subdomain=bakrie.ac.id
     path: ./ilped
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ilped '}
     <<: *prof
   'ilped2':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=unnes.ac.id&limit=2&format=vless&subdomain=unnes.ac.id
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=unnes.ac.id&limit=3&format=vless&subdomain=unnes.ac.id
     path: ./ilped2
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ilped2 '}
     <<: *prof
   'akun':
     type: file
     path: "./AKUN"
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '⚪ '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'x-akun '}
     health-check:
       enable: true
       url: http://connectivitycheck.gstatic.com/generate_204
