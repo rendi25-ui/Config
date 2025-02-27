@@ -77,11 +77,6 @@ proxy-groups:
       type: select
       lazy: true
     - interval: 600
-      name: 😎AKUN ⚪
-      use: [ akun ]
-      type: url-test
-      url: 'http://connectivitycheck.gstatic.com/generate_204'
-    - interval: 600
       tolerance: 100
       name: Server UDP
       use: [ udp ]
