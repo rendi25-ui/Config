@@ -1,5 +1,6 @@
 hosts:
-  'bug':
+  'bug': 'cp.cloudflare.com'
+  'cp.cloudflare.com':
   - 104.20.74.141
   - 104.20.75.141
 # XL/Axis Conference
