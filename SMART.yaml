@@ -108,12 +108,6 @@ proxy-providers:
     path: ./tls
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum tls '}
     <<: *prof
-  'ilped':
-    url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bakrie.ac.id&limit=2&format=vless&subdomain=bakrie.ac.id
-    path: ./ilped
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ilped '}
-    <<: *prof
   'akun':
     type: file
     path: "./AKUN"
