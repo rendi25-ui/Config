@@ -1,5 +1,6 @@
 hosts:
-  'bug':
+  'bug': 'cp.cloudflare.com'
+  'cp.cloudflare.com':
   - 104.20.6.62
   - 104.20.7.62
   - 2606:4700:10::6814:73e
