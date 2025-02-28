@@ -83,9 +83,6 @@ hosts:
   - 172.67.23.144
  # - 104.22.22.133
   - 104.22.23.133
-# opok
-  - 162.159.140.159
-  - 172.66.0.157
 # 🔴TELKOMSEL OMG 
  # - 104.22.5.240
   - 104.22.4.240
@@ -94,7 +91,10 @@ hosts:
   - 104.17.237.25
   - 104.18.21.219
   - 104.18.3.2
-  - 104.18.2.2  #ntls
+  - 104.18.2.2
+# opok
+  - 172.66.0.157
+  - 162.159.140.159 #ntls
 
 prof: &prof {type: http, size-limit: 15000, interval: 10800, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
       
