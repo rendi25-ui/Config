@@ -29,7 +29,7 @@ hosts:
   - 104.17.255.156
   - 104.19.185.16
   - 104.18.3.2
-  - 104.18.2.2
+  - 104.18.2.2  #ntls
 
 prof: &prof {type: http, size-limit: 15000, interval: 10800, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
       
