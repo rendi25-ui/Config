@@ -149,7 +149,7 @@ hosts:
   - 104.21.8.121
   - 172.67.139.111
   - 104.18.3.2
-  - 104.18.2.2 #ntls
+  - 104.16.108.96 #ntls AXIS game
 
 prof: &prof {type: http, size-limit: 15000, interval: 10800, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
       
