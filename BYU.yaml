@@ -69,7 +69,7 @@ proxy-groups:
       lazy: true
     - name: UDP
       proxies: [ Server UDP, PASS ]
-      use: [ udp ]
+      use: [ udp, udp2 ]
       type: select
       lazy: true
     - name: porn
@@ -83,7 +83,7 @@ proxy-groups:
     - interval: 600
       tolerance: 100
       name: Server UDP
-      use: [ udp ]
+      use: [ udp, udp2 ]
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - name: ALL wc+nwc
@@ -134,6 +134,12 @@ proxy-providers:
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
     path: ./UDP
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
+    <<: *prof
+  'udp2':
+    url: >-
+      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-nau.yaml
+    path: ./UDP2
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
     <<: *prof
 
