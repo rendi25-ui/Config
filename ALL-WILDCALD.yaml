@@ -42,6 +42,12 @@ proxy-groups:
     - name: UMUM
       proxies: [ AUTO ALL ]
       include-all-providers: true
+      exclude-filter: UDP
+      type: select
+      lazy: true
+    - name: UDP
+      proxies: [ Server UDP, PASS ]
+      use: [ udp2 ]
       type: select
       lazy: true
     - name: porn
@@ -59,6 +65,12 @@ proxy-groups:
       url: 'http://connectivitycheck.gstatic.com/generate_204'
       interval: 600
       lazy: true
+    - interval: 600
+      tolerance: 100
+      name: Server UDP
+      use: [ udp2 ]
+      type: fallback
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
 proxy-providers:
   'zoom':
     url: >-
@@ -108,6 +120,12 @@ proxy-providers:
     path: ./onga
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'onga '}
     <<: *prof
+  'udp2':
+    url: >-
+      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-nau.yaml
+    path: ./UDP2
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
+    <<: *prof
 rule-providers:
   malware: 
     type: http 
@@ -128,8 +146,12 @@ rules:
 - IP-CIDR,122.122.0.0/8,DIRECT,no-resolve
 - RULE-SET,phishing,REJECT
 - RULE-SET,malware,REJECT
+- NETWORK,UDP,UDP
 - GEOSITE,category-porn,porn
 - DST-PORT,123/136/137-139,DIRECT 
 - SRC-PORT,123/136/137-139,DIRECT,udp
+- AND,((NETWORK,UDP),(OR,((DST-PORT,443/80),(GEOSITE,youtube)))),REJECT
+- AND,((OR,((DOMAIN-KEYWORD,instagram),(DOMAIN-KEYWORD,facebook))),(NETWORK,UDP)),REJECT
 - AND,((GEOSITE,category-ads-all),(NOT,((DOMAIN-SUFFIX,googlesyndication.com)))),IKLANWEB
+- MATCH,UMUM
 - MATCH,UMUM
