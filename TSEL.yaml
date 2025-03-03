@@ -117,6 +117,11 @@ profile:
   store-selected: false
   store-fake-ip: true
 geodata-mode: true
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: false
   sniff:
     HTTP:
       ports: [80, 8080-8880]
