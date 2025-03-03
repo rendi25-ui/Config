@@ -136,7 +136,7 @@ dns:
     geosite: [ gfw ]
 proxy-groups:
     - name: UMUM
-      proxies: [ ALL, tls, DIRECT ]
+      proxies: [ ALL, tls, ntls ]
       include-all-providers: true
       exclude-filter: UDP
       type: select
@@ -169,6 +169,13 @@ proxy-groups:
       lazy: true
     - name: tls
       use: [ tls, tls2 ]
+      exclude-filter: UDP
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+      interval: 600
+      lazy: true
+    - name: ntls
+      use: [ ilped, ilped2 ]
       exclude-filter: UDP
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
