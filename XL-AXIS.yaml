@@ -11,6 +11,7 @@ hosts:
   - 162.159.138.78
  # - 162.159.128.79
   - 104.17.73.206
+  - 104.18.3.2
  # - 104.17.70.206
   - 104.16.143.237
  # - 104.16.142.237
@@ -181,7 +182,7 @@ dns:
     geosite: [ gfw ]
 proxy-groups:
     - name: UMUM
-      proxies: [ ALL ]
+      proxies: [ ALL, tls, ntls ]
       include-all-providers: true
       exclude-filter: UDP
       type: select
@@ -212,29 +213,67 @@ proxy-groups:
       url: 'http://connectivitycheck.gstatic.com/generate_204'
       interval: 600
       lazy: true
+    - name: tls
+      use: [ ava, udemy, vidio, viu ]
+      exclude-filter: UDP
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+      interval: 600
+      lazy: true
+    - name: ntls
+      use: [ ava2, udemy2, vidio2, viu2 ]
+      exclude-filter: UDP
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+      interval: 600
+      lazy: true
 proxy-providers:
   'vidio':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=quiz.vidio.com&limit=3&format=vless&subdomain=quiz.vidio.com
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=quiz.vidio.com&limit=1&format=vless&subdomain=quiz.vidio.com
     path: ./vidio
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'vidio '}
     <<: *prof
   'ava':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=ava.game.naver.com&limit=3&format=vless&subdomain=ava.game.naver.com
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=ava.game.naver.com&limit=1&format=vless&subdomain=ava.game.naver.com
     path: ./ava
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ava '}
     <<: *prof
   'viu':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=help.viu.com&limit=3&format=vless&subdomain=help.viu.com
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=help.viu.com&limit=1&format=vless&subdomain=help.viu.com
     path: ./viu
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'viu '}
     <<: *prof
   'udemy':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=www.udemy.com&limit=3&format=vless&subdomain=www.udemy.com
-    path: ./viu
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=www.udemy.com&limit=1&format=vless&subdomain=www.udemy.com
+    path: ./udemy
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'udemy '}
+    <<: *prof
+  'vidio2':
+    url: >-
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=quiz.vidio.com&limit=1&format=vless&subdomain=quiz.vidio.com
+    path: ./vidio2
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'vidio '}
+    <<: *prof
+  'ava2':
+    url: >-
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=ava.game.naver.com&limit=1&format=vless&subdomain=ava.game.naver.com
+    path: ./ava2
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ava '}
+    <<: *prof
+  'viu2':
+    url: >-
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=help.viu.com&limit=1&format=vless&subdomain=help.viu.com
+    path: ./viu2
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'viu '}
+    <<: *prof
+  'udemy2':
+    url: >-
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=www.udemy.com&limit=1&format=vless&subdomain=www.udemy.com
+    path: ./udemy2
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'udemy '}
     <<: *prof
   'akun':
