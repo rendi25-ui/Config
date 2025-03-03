@@ -1,5 +1,19 @@
 hosts:
   'unnes.ac.id':
+  - 104.18.160.90
+  - 104.16.66.85
+  - 104.16.86.20
+  - 104.16.170.10
+  - 104.18.106.64
+  - 104.16.182.114
+  - 104.21.21.104
+  - 172.67.21.177
+  - 104.22.60.94
+  - 104.21.38.157
+  - 104.21.8.162
+  - 104.21.11.175
+  - 162.159.134.42
+  - 104.21.29.207
 # 🔴TSEL ILPED
   - 162.159.128.79
   - 104.17.71.206
@@ -19,20 +33,9 @@ hosts:
   #- 104.26.7.171
   - 104.18.24.139
   - 104.16.226.91
-  - 104.18.160.90
-  - 104.16.66.85
-  - 104.16.86.20
-  - 104.16.170.10
-  - 104.18.106.64
-  - 104.16.182.114
-  - 104.21.21.104
-  - 172.67.21.177
-  - 104.22.60.94
-  - 104.21.38.157
-  - 104.21.8.162
-  - 104.21.11.175
-  - 162.159.134.42
-  - 104.21.29.207
+  - 104.18.3.2
+
+  'bakrie.ac.id':
 # ruangguru.com
   - 104.22.21.245
  # - 104.22.20.245
@@ -45,9 +48,6 @@ hosts:
   - 172.67.74.70
   - 104.26.14.196
   - 104.18.3.2
-  #- 104.26.15.196
-
-  'bakrie.ac.id':
 # www.educe.co.uk
   - 104.21.21.104
   - 172.67.197.242
@@ -136,14 +136,14 @@ dns:
     geosite: [ gfw ]
 proxy-groups:
     - name: UMUM
-      proxies: [ ALL ]
+      proxies: [ ALL, tls, DIRECT ]
       include-all-providers: true
       exclude-filter: UDP
       type: select
       lazy: true
     - name: UDP
       proxies: [ Server UDP, PASS ]
-      use: [ udp, udp2 ]
+      use: [ udp2 ]
       type: select
       lazy: true
     - name: porn
@@ -157,11 +157,18 @@ proxy-groups:
     - interval: 600
       tolerance: 100
       name: Server UDP
-      use: [ udp, udp2 ]
+      use: [ udp2 ]
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - name: ALL
       include-all-providers: true
+      exclude-filter: UDP
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+      interval: 600
+      lazy: true
+    - name: tls
+      use: [ tls, tls2 ]
       exclude-filter: UDP
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
@@ -182,8 +189,14 @@ proxy-providers:
     <<: *prof
   'tls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=unnes.ac.id&limit=3&format=vless&subdomain=unnes.ac.id
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=unnes.ac.id&limit=3&format=vless
     path: ./tls
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
+    <<: *prof
+  'tls2':
+    url: >-
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bakrie.ac.id&limit=3&format=vless
+    path: ./tls2
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
     <<: *prof
   'akun':
@@ -194,13 +207,6 @@ proxy-providers:
       enable: true
       url: http://connectivitycheck.gstatic.com/generate_204
       interval: 300
-  'udp':
-    url: >-
-      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
-    path: ./UDP
-    dialer-proxy: UMUM
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
-    <<: *prof
   'udp2':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-nau.yaml
