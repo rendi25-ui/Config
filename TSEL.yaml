@@ -1,6 +1,5 @@
 hosts:
-  'bug': 'cp.cloudflare.com'
-  'cp.cloudflare.com':
+  'unnes.ac.id':
 # 🔴TSEL ILPED
   - 162.159.128.79
   - 104.17.71.206
@@ -45,7 +44,10 @@ hosts:
 # api.midtrans.com
   - 172.67.74.70
   - 104.26.14.196
+  - 104.18.3.2
   #- 104.26.15.196
+
+  'bakrie.ac.id':
 # www.educe.co.uk
   - 104.21.21.104
   - 172.67.197.242
@@ -134,7 +136,7 @@ dns:
     geosite: [ gfw ]
 proxy-groups:
     - name: UMUM
-      proxies: [ ALL wc+nwc, NO-WC (tls), NO-WC (ntls) ]
+      proxies: [ ALL ]
       include-all-providers: true
       exclude-filter: UDP
       type: select
@@ -158,36 +160,14 @@ proxy-groups:
       use: [ udp, udp2 ]
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
-    - name: ALL wc+nwc
+    - name: ALL
       include-all-providers: true
       exclude-filter: UDP
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
       interval: 600
       lazy: true
-    - interval: 600
-      name: NO-WC (tls)
-      use: [ umum tls ]
-      type: url-test
-      url: 'http://connectivitycheck.gstatic.com/generate_204'
-    - interval: 600
-      name: NO-WC (ntls)
-      use: [ umum ntls ]
-      type: url-test
-      url: 'http://connectivitycheck.gstatic.com/generate_204'
 proxy-providers:
-  'umum ntls':
-    url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=3&format=vless&subdomain=bakrie.ac.id
-    path: ./ntls
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum ntls '}
-    <<: *prof
-  'umum tls':
-    url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=3&format=vless&subdomain=bakrie.ac.id
-    path: ./tls
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'umum tls '}
-    <<: *prof
   'ilped':
     url: >-
       https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bakrie.ac.id&limit=3&format=vless&subdomain=bakrie.ac.id
@@ -199,6 +179,12 @@ proxy-providers:
       https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=unnes.ac.id&limit=3&format=vless&subdomain=unnes.ac.id
     path: ./ilped2
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ilped2 '}
+    <<: *prof
+  'tls':
+    url: >-
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=unnes.ac.id&limit=3&format=vless&subdomain=unnes.ac.id
+    path: ./tls
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
     <<: *prof
   'akun':
     type: file
@@ -212,12 +198,14 @@ proxy-providers:
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
     path: ./UDP
+    dialer-proxy: UMUM
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
     <<: *prof
   'udp2':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-nau.yaml
     path: ./UDP2
+    dialer-proxy: UMUM
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
     <<: *prof
 
