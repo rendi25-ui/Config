@@ -249,12 +249,14 @@ proxy-providers:
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
     path: ./UDP
+    dialer-proxy: UMUM
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
     <<: *prof
   'udp2':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-nau.yaml
     path: ./UDP2
+    dialer-proxy: UMUM
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
     <<: *prof
 
