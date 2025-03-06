@@ -267,7 +267,16 @@ rule-providers:
     url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/phishing.txt" 
     path: ./ruleset/phishing.txt 
     interval: 86400
+  torrent: 
+    type: http 
+    format: yaml 
+    behavior: domain 
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Download/Download.yaml" 
+    path: ./ruleset/torrent.yaml
+    interval: 86400
+
 rules:
+- RULE-SET,torrent,REJECT
 - IP-CIDR,127.0.0.0/8,DIRECT
 - IP-CIDR,122.122.0.0/8,DIRECT,no-resolve
 - RULE-SET,phishing,REJECT
