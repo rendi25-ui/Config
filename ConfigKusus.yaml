@@ -1,0 +1,169 @@
+#CONFIG KUSUS 
+#JIKA BUG ANDA BELUM TERTULIS DI KOMENTAR CHANNEL, MAKA TIDAK KAN DIMASUKKAN KE CONFIG INI
+
+prof: &prof {type: http, size-limit: 15000, interval: 10800, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
+      
+global-client-fingerprint: random
+log-level: silent
+routing-mark: 6666
+mode: rule
+port: 7890
+socks-port: 7891
+redir-port: 7892
+tproxy-port: 7893
+ipv6: true
+allow-lan: true
+unified-delay: true
+tcp-concurrent: true
+interface-name: en0
+profile:
+  store-selected: false
+  store-fake-ip: true
+geodata-mode: true
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: false
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  force-domain:
+    - +.v2ex.com
+    - +.google.com
+  skip-domain:
+    - bakrie.ac.id
+    - unnes.ac.id
+    - space.byu.id
+    - api.zoom.us
+    - quiz.vidio.com
+    - help.viu.com
+    - www.udemy.com
+    - ava.game.naver.com
+  skip-src-address:
+    - 192.168.0.3/32
+  skip-dst-address:
+    - 192.168.0.3/32
+dns:
+  enable: true
+  prefer-h3: true
+  use-hosts: true
+  use-system-hosts: true
+  respect-rules: true
+  listen: 0.0.0.0:53
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver:
+    - 'https://8.8.8.8/dns-query#ecs=223.5.5.0/24&ecs-override=true'
+    - 'https://1.1.1.1/dns-query#ecs=223.5.5.0/24&ecs-override=true'
+  fallback: [ 'system', 1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4 ]
+  proxy-server-nameserver: [ 'system', 'https://mozilla.cloudflare-dns.com/dns-query#DNS&h3=true', 'https://mozilla.cloudflare-dns.com/dns-query#skip-cert-verify=true' ]
+  fallback-filter:
+    geosite: [ gfw ]
+  nameserver-policy:
+    'geosite:gfw,category-ads-all': rcode://success
+    'rule-set:malware,phishing,torrent': rcode://success
+proxy-groups:
+    - name: UMUM
+      proxies: [ ALL ]
+      include-all-providers: true
+      exclude-filter: UDP
+      type: select
+      lazy: true
+    - name: UDP
+      proxies: [ Server UDP, PASS ]
+      use: [ udp ]
+      type: select
+      lazy: true
+    - name: porn
+      proxies: [ REJECT, PASS ]
+      type: select
+      lazy: true
+    - name: IKLANWEB
+      proxies: [ REJECT, PASS ]
+      type: select
+      lazy: true
+    - interval: 600
+      tolerance: 100
+      name: Server UDP
+      use: [ udp ]
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+    - name: ALL
+      include-all-providers: true
+      exclude-filter: UDP
+      type: url-test
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+      interval: 600
+      lazy: true
+proxy-providers:
+  'tls':
+    url: >-
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=6&format=vless
+    path: ./TLS
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'TLS '}
+    <<: *prof
+  'ntls':
+    url: >-
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=6&format=vless
+    path: ./NTLS
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'NTLS '}
+    <<: *prof
+  'akun':
+    type: file
+    path: "./AKUN"
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'MY-ACCOUNT '}
+    health-check:
+      enable: true
+      url: http://connectivitycheck.gstatic.com/generate_204
+      interval: 300
+  'udp':
+    url: >-
+      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
+    path: ./UDP
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
+    <<: *prof
+
+rule-providers:
+  malware: 
+    type: http 
+    format: text 
+    behavior: domain 
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/malware.txt" 
+    path: ./ruleset/malware.txt
+    interval: 86400
+  phishing: 
+    type: http 
+    format: text 
+    behavior: domain 
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/phishing.txt" 
+    path: ./ruleset/phishing.txt 
+    interval: 86400
+  torrent: 
+    type: http 
+    format: yaml 
+    behavior: domain 
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Download/Download.yaml" 
+    path: ./ruleset/torrent.yaml
+    interval: 86400
+
+rules:
+- RULE-SET,torrent,REJECT
+- IP-CIDR,127.0.0.0/8,DIRECT
+- IP-CIDR,122.122.0.0/8,DIRECT,no-resolve
+- RULE-SET,phishing,REJECT
+- RULE-SET,malware,REJECT
+- NETWORK,UDP,UDP
+- GEOSITE,category-porn,porn
+- DST-PORT,123/136/137-139,DIRECT 
+- SRC-PORT,123/136/137-139,DIRECT,udp
+- AND,((NETWORK,UDP),(OR,((DST-PORT,443/80),(GEOSITE,youtube)))),REJECT
+- AND,((OR,((GEOSITE,instagram),(GEOSITE,facebook))),(NETWORK,UDP)),REJECT
+- AND,((GEOSITE,category-ads-all),(NOT,((DOMAIN-SUFFIX,googlesyndication.com)))),IKLANWEB
+- MATCH,UMUM
