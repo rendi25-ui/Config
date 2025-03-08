@@ -105,13 +105,13 @@ proxy-groups:
 proxy-providers:
   '104.18.3.2':
     url: >-
-      https://nautica.foolvpn.me/api/v1/sub?cc=SG&limit=2&vpn=vless&port=443,80&domain=104.18.3.2
+      https://nautica.foolvpn.me/api/v1/sub?cc=ID&limit=2&vpn=vless&port=443,80&domain=104.18.3.2
     path: ./104.18.3.2
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '104.18.3.2-'}
     <<: *prof
   '172.67.22.129':
     url: >-
-      https://nautica.foolvpn.me/api/v1/sub?cc=SG&limit=1&vpn=vless&port=80&domain=172.67.22.129
+      https://nautica.foolvpn.me/api/v1/sub?cc=ID&limit=1&vpn=vless&port=80&domain=172.67.22.129
     path: ./172.67.22.129
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '172.67.22.129-'}
     <<: *prof
