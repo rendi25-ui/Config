@@ -107,7 +107,7 @@ proxy-providers:
     url: >-
       https://nautica.foolvpn.me/api/v1/sub?cc=ID&limit=2&vpn=vless&port=443,80&domain=104.18.3.2
     path: ./TLS
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '104.18.3.2'}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '104.18.3.2 '}
     <<: *prof
   'akun':
     type: file
