@@ -109,6 +109,12 @@ proxy-providers:
     path: ./TLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '104.18.3.2-'}
     <<: *prof
+  '172.67.22.129':
+    url: >-
+      https://nautica.foolvpn.me/api/v1/sub?cc=ID&limit=1&vpn=vless&port=80&domain=172.67.22.129
+    path: ./TLS
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: '172.67.22.129-'}
+    <<: *prof
   'akun':
     type: file
     path: "./AKUN"
