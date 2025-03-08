@@ -119,7 +119,7 @@ proxy-providers:
       interval: 300
   'udp':
     url: >-
-      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-nau.yaml
+      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/Z-UDP.yaml
     path: ./UDP
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
     <<: *prof
