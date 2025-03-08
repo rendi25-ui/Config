@@ -1,4 +1,4 @@
-#CONFIG KUSUS
+#CONFIG KUSUS z
 #JIKA BUG ANDA BELUM TERTULIS DI KOMENTAR CHANNEL, MAKA TIDAK KAN DIMASUKKAN KE CONFIG INI
 
 prof: &prof {type: http, size-limit: 15000, interval: 10800, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
