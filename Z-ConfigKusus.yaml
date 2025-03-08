@@ -103,17 +103,11 @@ proxy-groups:
       interval: 600
       lazy: true
 proxy-providers:
-  'tls':
+  '104.18.3.2':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=6&format=vless
+      https://nautica.foolvpn.me/api/v1/sub?cc=ID&limit=2&vpn=vless&port=443,80&domain=104.18.3.2
     path: ./TLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'TLS '}
-    <<: *prof
-  'ntls':
-    url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=6&format=vless
-    path: ./NTLS
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'NTLS '}
     <<: *prof
   'akun':
     type: file
