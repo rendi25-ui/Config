@@ -120,24 +120,22 @@ proxy-groups:
 proxy-providers:
   'umum ntls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=6&format=vless
-    path: ./ntls
+      https://nautica.foolvpn.me/api/v1/sub?cc=SG&limit=12&vpn=vless&port=80,443&domain=bug
+    path: ./online
+    filter: nTLS | NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ntls '}
     <<: *prof
   'umum tls':
-    url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=6&format=vless
-    path: ./tls
+    type: file
+    path: ./online
+    exclude-filter: nTLS | NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
-    <<: *prof
+    health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}
   'akun':
     type: file
     path: "./AKUN"
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'x-akun '}
-    health-check:
-      enable: true
-      url: http://connectivitycheck.gstatic.com/generate_204
-      interval: 300
+    health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}
   'udp':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
