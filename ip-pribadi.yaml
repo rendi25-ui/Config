@@ -1,4 +1,4 @@
-# notes, jangan terlalu banyak ip karena berpengaruh sama loading respon config berat. ( 2 disarankan ) 
+# jangan terlalu banyak ip karena berpengaruh sama loading respon config berat. ( 2 disarankan ) 
 # ip ditulis dengan format seperti contoh, dan ip paling bawah adalah ip support ntls/port80
 
 hosts:
@@ -76,9 +76,8 @@ dns:
     'rule-set:malware,phishing,torrent': rcode://success
 proxy-groups:
     - name: UMUM
-      proxies: [ ALL, tls, ntls ]
-      include-all-providers: true
-      exclude-filter: UDP
+      proxies: [ ALL, UDP, DIRECT ]
+      use: [ umum ntls, umum tls ]
       type: select
       lazy: true
     - name: UDP
@@ -107,16 +106,6 @@ proxy-groups:
       url: 'http://connectivitycheck.gstatic.com/generate_204'
       interval: 600
       lazy: true
-    - interval: 600
-      name: tls
-      use: [ umum tls ]
-      type: url-test
-      url: 'http://connectivitycheck.gstatic.com/generate_204'
-    - interval: 600
-      name: ntls
-      use: [ umum ntls ]
-      type: url-test
-      url: 'http://connectivitycheck.gstatic.com/generate_204'
 proxy-providers:
   'umum ntls':
     url: >-
