@@ -109,17 +109,17 @@ proxy-groups:
 proxy-providers:
   'umum ntls':
     url: >-
-      https://nautica.foolvpn.me/api/v1/sub?cc=SG&limit=12&vpn=vless&port=80,443&domain=bug
-    path: ./online
-    filter: nTLS | NTLS
+      https://sub.garaaa.biz.id/sub/v2rayng?type=vless&bug=bug&wildcard=false&tls=flase&country=SG&limit=6
+    path: ./online1
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ntls '}
     <<: *prof
   'umum tls':
-    type: file
-    path: ./online
+    url: >-
+      https://sub.garaaa.biz.id/sub/v2rayng?type=vless&bug=bug&wildcard=false&tls=true&country=SG&limit=6
+    path: ./online2
     exclude-filter: nTLS | NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
-    health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}
+    <<: *prof
   'akun':
     type: file
     path: "./AKUN"
