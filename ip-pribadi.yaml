@@ -97,7 +97,7 @@ proxy-groups:
       tolerance: 100
       name: Server UDP
       use: [ udp, udpx, udpy, udpz ]
-      type: url-test
+      type: fallback
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - name: ALL
       include-all-providers: true
