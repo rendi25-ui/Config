@@ -97,12 +97,12 @@ proxy-groups:
       tolerance: 100
       name: Server UDP
       use: [ udp, udpx, udpy, udpz ]
-      type: fallback
+      type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - name: ALL
       include-all-providers: true
       exclude-filter: UDP
-      type: fallback
+      type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
       interval: 600
       lazy: true
