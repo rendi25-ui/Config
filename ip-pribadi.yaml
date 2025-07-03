@@ -1,6 +1,4 @@
-# jangan terlalu banyak ip karena berpengaruh sama loading respon config berat. ( 2 disarankan ) 
-# ip ditulis dengan format seperti contoh, dan ip paling bawah adalah ip support ntls/port80
-
+#tls
 hosts:
   'bug':
   - 104.18.3.2 #tls
