@@ -41,6 +41,9 @@ sniffer:
   force-domain:
     - +.v2ex.com
     - +.google.com
+    - +.wifi.id
+    - wifi.id
+    - welcome2.wifi.id
   skip-domain:
     - bakrie.ac.id
     - unnes.ac.id
