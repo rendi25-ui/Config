@@ -2,6 +2,8 @@
 hosts:
   'bug':
   - 104.18.3.2 #tls
+  - 104.18.51.6 #byuilped
+  - 104.18.53.42 #byuilped
   - 104.18.2.2 #ntls
 
 prof: &prof {type: http, size-limit: 15000, interval: 10800, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
