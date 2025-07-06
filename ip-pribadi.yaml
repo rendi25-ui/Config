@@ -8,7 +8,7 @@ hosts:
 
 prof: &prof {type: http, size-limit: 15000, interval: 10800, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
       
-global-client-fingerprint: random
+global-client-fingerprint: safari
 log-level: silent
 routing-mark: 6666
 mode: rule
