@@ -115,14 +115,14 @@ proxy-providers:
       https://sub.garaaa.biz.id/sub/v2rayng?type=vless&bug=bug&wildcard=false&tls=flase&country=SG&limit=3
     path: ./online1
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ntls '}
-   <<: *prof
+    <<: *prof
   'umum tls':
     url: >-
       https://sub.garaaa.biz.id/sub/v2rayng?type=vless&bug=bug&wildcard=false&tls=true&country=SG&limit=3
     path: ./online2
     exclude-filter: nTLS | NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
-   <<: *prof
+    <<: *prof
   'akun':
     type: file
     path: "./AKUN"
@@ -133,25 +133,25 @@ proxy-providers:
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
     path: ./UDP
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
-   <<: *prof
+    <<: *prof
   'udpx':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugx.yaml
     path: ./UDPx
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPx '}
-   <<: *prof
+    <<: *prof
   'udpy':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugy.yaml
     path: ./UDPy
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPy '}
-   <<: *prof
+    <<: *prof
   'udpz':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugz.yaml
     path: ./UDPz
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPz '}
-   <<: *prof
+    <<: *prof
 
 rule-providers:
   malware: 
