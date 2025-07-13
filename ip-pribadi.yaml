@@ -122,26 +122,14 @@ proxy-providers:
       https://sub.garaaa.biz.id/sub/v2rayng?type=vless&bug=bug&wildcard=false&tls=false&country=SG&limit=3
     path: ./online1
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ntls '}
-    type: http
-    size-limit: 15000
-    interval: 3600
-    health-check:
-      enable: true
-      url: http://connectivitycheck.gstatic.com/generate_204
-      interval: 300
+    <<: *prof
   'umum tls':
     url: >-
       https://sub.garaaa.biz.id/sub/v2rayng?type=vless&bug=bug&wildcard=false&tls=true&country=SG&limit=3
     path: ./online2
     exclude-filter: nTLS | NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
-    type: http
-    size-limit: 15000
-    interval: 3600
-    health-check:
-      enable: true
-      url: http://connectivitycheck.gstatic.com/generate_204
-      interval: 300
+    <<: *prof
   'akun':
     type: file
     path: "./AKUN"
