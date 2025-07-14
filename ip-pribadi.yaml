@@ -4,8 +4,8 @@ hosts:
   - 104.18.3.2 #tls
   - 104.18.2.2 #ntls
 
-prof: &prof {type: http, size-limit: 15000, interval: 3600, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
-      
+prof: &prof {type: http, size-limit: 15000, interval: 3600, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}, header: {User-Agent: ["Clash/v1.18.0", "mihomo/1.18.3"], Authorization: ['token 1231231']}}
+
 global-client-fingerprint: chrome
 log-level: silent
 routing-mark: 6666
