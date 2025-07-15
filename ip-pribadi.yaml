@@ -4,7 +4,7 @@ hosts:
   - 104.18.3.2 #tls
   - 104.18.2.2 #ntls
 
-prof: &prof {interval: 600, type: http, size-limit: 15000, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
+prof: &prof {interval: 3600, type: http, size-limit: 15000, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
 
 global-client-fingerprint: qq
 log-level: silent
