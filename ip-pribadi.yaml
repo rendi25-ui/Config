@@ -1,4 +1,4 @@
-#filesproxy
+#files
 hosts:
   'bug':
   - 104.18.3.2 #tls
