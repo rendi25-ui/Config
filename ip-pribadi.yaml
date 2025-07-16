@@ -4,7 +4,7 @@ hosts:
   - 104.18.3.2 #tls
   - 104.18.2.2 #ntls
 
-prof: &prof {interval: 600, type: http, size-limit: 15000, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
+prof: &prof {interval: 3600, type: http, size-limit: 15000, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
 
 global-client-fingerprint: qq
 log-level: silent
@@ -110,13 +110,13 @@ proxy-groups:
 proxy-providers:
   'umum ntls':
     url: >-
-      https://sub.garaaa.biz.id/sub/v2rayng?type=vless&bug=bug&wildcard=false&tls=false&country=SG&limit=6
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=6&format=vless
     path: ./online1
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ntls '}
     <<: *prof
   'umum tls':
     url: >-
-      https://sub.garaaa.biz.id/sub/v2rayng?type=vless&bug=bug&wildcard=false&tls=true&country=SG&limit=6
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=6&format=vless
     path: ./online2
     exclude-filter: nTLS | NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
