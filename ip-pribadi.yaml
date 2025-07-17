@@ -36,25 +36,6 @@ sniffer:
       ports: [443, 8443]
     QUIC:
       ports: [443, 8443]
-  force-domain:
-    - +.v2ex.com
-    - +.google.com
-    - +.wifi.id
-    - wifi.id
-    - welcome2.wifi.id
-  skip-domain:
-    - bakrie.ac.id
-    - unnes.ac.id
-    - space.byu.id
-    - api.zoom.us
-    - quiz.vidio.com
-    - help.viu.com
-    - www.udemy.com
-    - ava.game.naver.com
-  skip-src-address:
-    - 192.168.0.3/32
-  skip-dst-address:
-    - 192.168.0.3/32
 dns:
   enable: true
   prefer-h3: true
