@@ -119,13 +119,13 @@ proxy-groups:
 proxy-providers:
   'umum ntls':
     url: >-
-      https://sub.garaaa.biz.id/sub/v2rayng?type=vless&bug=bug&wildcard=false&tls=flase&country=SG&limit=3
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=6&format=raw
     path: ./online1
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ntls '}
     <<: *prof
   'umum tls':
     url: >-
-      https://sub.garaaa.biz.id/sub/v2rayng?type=vless&bug=bug&wildcard=false&tls=true&country=SG&limit=3
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=6&format=raw
     path: ./online2
     exclude-filter: nTLS | NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
