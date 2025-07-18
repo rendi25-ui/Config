@@ -33,7 +33,7 @@ interface-name: en0
 profile:
   store-selected: false
   store-fake-ip: true
-geodata-mode: true
+geodata-mode: false
 sniffer:
   enable: true
   force-dns-mapping: true
