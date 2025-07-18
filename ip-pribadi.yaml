@@ -87,10 +87,9 @@ proxy-groups:
       type: select
       lazy: true
     - interval: 600
-      tolerance: 30
       name: Server UDP
       use: [ udpx, udpy, udpz, udp ]
-      type: url-test
+      type: fallback
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - name: ALL
       include-all-providers: true
