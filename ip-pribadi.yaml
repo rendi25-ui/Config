@@ -81,14 +81,14 @@ proxy-groups:
       tolerance: 100
       name: Server UDP
       use: [ udpx, udpy, udpz, udp ]
-      type: load-balance
-      strategy: round-robin
+      type: url-test
+      tolerance: 30
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - name: ALL
       include-all-providers: true
       exclude-filter: UDP
-      type: load-balance
-      strategy: round-robin
+      type: url-test
+      tolerance: 30
       url: 'http://connectivitycheck.gstatic.com/generate_204'
       interval: 600
       lazy: true
