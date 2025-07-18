@@ -17,6 +17,7 @@ tls:
     dC5jb20AAA==
     -----END ECH KEYS-----
 global-client-fingerprint: random
+etag-support: true
 log-level: silent
 routing-mark: 6666
 mode: rule
