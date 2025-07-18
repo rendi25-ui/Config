@@ -78,7 +78,6 @@ proxy-groups:
       type: select
       lazy: true
     - interval: 600
-      tolerance: 100
       name: Server UDP
       use: [ udpx, udpy, udpz, udp ]
       type: url-test
