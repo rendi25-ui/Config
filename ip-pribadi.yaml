@@ -169,6 +169,7 @@ rule-providers:
 
 rules:
 - RULE-SET,torrent,REJECT
+- SRC-IP-CIDR,192.168.1.201/32,DIRECT
 - IP-CIDR,127.0.0.0/8,DIRECT
 - IP-CIDR,122.122.0.0/8,DIRECT,no-resolve
 - RULE-SET,phishing,REJECT
