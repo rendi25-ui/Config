@@ -1,4 +1,4 @@
-#filesx
+#files
 hosts:
   'bug':
   - 104.18.3.2 #tls
@@ -78,10 +78,10 @@ proxy-groups:
       type: select
       lazy: true
     - interval: 600
+      tolerance: 30
       name: Server UDP
       use: [ udpx, udpy, udpz, udp ]
       type: url-test
-      tolerance: 30
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - name: ALL
       include-all-providers: true
