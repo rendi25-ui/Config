@@ -7,8 +7,16 @@ hosts:
 prof: &prof {interval: 3600, type: http, size-limit: 15000, health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
 
 prof2: &prof2 {interval: 86400, type: http, size-limit: 15000, health-check: {enable: false, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}}
-
-global-client-fingerprint: qq
+tls:
+  certificate: string
+  private-key: string
+  ech-key: |-
+    -----BEGIN ECH KEYS-----
+    ACATwY30o/RKgD6hgeQxwrSiApLaCgU+HKh7B6SUrAHaDwBD/g0APwAAIAAgHjzK
+    madSJjYQIf9o1N5GXjkW4DEEeb17qMxHdwMdNnwADAABAAEAAQACAAEAAwAIdGVz
+    dC5jb20AAA==
+    -----END ECH KEYS-----
+global-client-fingerprint: random
 log-level: silent
 routing-mark: 6666
 mode: rule
