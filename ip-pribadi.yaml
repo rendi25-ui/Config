@@ -83,12 +83,12 @@ proxy-groups:
       proxies: [ REJECT, PASS ]
       type: select
       lazy: true
-    - interval: 600
-      tolerance: 100
+    - interval: 300
+      tolerance: 10
       name: Server UDP
       proxies: [ dns-out ]
       use: [ udpx, udpy, udpz, udp ]
-      type: fallback
+      type: url-test
       lazy: true
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - name: ALL
@@ -97,7 +97,7 @@ proxy-groups:
       exclude-filter: UDP
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
-      interval: 600
+      interval: 300
       lazy: true
 proxy-providers:
   'umum ntls':
