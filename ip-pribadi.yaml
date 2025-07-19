@@ -4,6 +4,7 @@ prof: &prof
     interval: 3600
     health-check:
       enable: true
+      lazy: true
       url: http://connectivitycheck.gstatic.com/generate_204
       interval: 300
 proxies:
