@@ -1,9 +1,14 @@
 #tls
 hosts:
-  'bug':
+  'nuclear.biz.id': 'bug.com'
+  'worker.my.id': 'bug.com'
+  'worker.biz.id': 'bug.com'
+  'nautica.my.id': 'bug.com'
+  'nuclear.us.kg': 'bug.com'
+  'tcp.biz.id': 'bug.com'
+  'jeelsboobz.biz.id': 'bug.com'
+  'bug.com':
   - 104.18.3.2 #tls
-  - 104.18.51.6 #byuilped
-  - 104.18.53.42 #byuilped
   - 104.18.2.2 #ntls
 
 prof: &prof
@@ -127,13 +132,13 @@ proxy-groups:
 proxy-providers:
   'umum ntls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug&limit=6&format=raw
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug.com&limit=6&format=raw
     path: ./online1
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ntls '}
     <<: *prof
   'umum tls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug&limit=6&format=raw
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug.com&limit=6&format=raw
     path: ./online2
     exclude-filter: nTLS | NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
