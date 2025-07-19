@@ -1,19 +1,3 @@
-#tls
-hosts:
-  'nuclear.biz.id': 'bug.com'
-  'worker.my.id': 'bug.com'
-  'worker.biz.id': 'bug.com'
-  'nautica.my.id': 'bug.com'
-  'nuclear.us.kg': 'bug.com'
-  'tcp.biz.id': 'bug.com'
-  'jeelsboobz.biz.id': 'bug.com'
-  'sg1.foolvpn.me': 'bug.com'
-  'id1.foolvpn.me': 'bug.com'
-  'id2.foolvpn.me': 'bug.com'
-  'bug.com':
-  - 104.18.3.2 #tls
-  - 104.18.2.2 #ntls
-
 prof: &prof
     type: http
     size-limit: 15000
@@ -214,3 +198,17 @@ rules:
 - AND,((GEOSITE,category-ads-all),(NOT,((DOMAIN-SUFFIX,googlesyndication.com)))),IKLANWEB
 - MATCH,UMUM
 
+hosts:
+  'nuclear.biz.id': 'bug.com'
+  'worker.my.id': 'bug.com'
+  'worker.biz.id': 'bug.com'
+  'nautica.my.id': 'bug.com'
+  'nuclear.us.kg': 'bug.com'
+  'tcp.biz.id': 'bug.com'
+  'jeelsboobz.biz.id': 'bug.com'
+  'sg1.foolvpn.me': 'bug.com'
+  'id1.foolvpn.me': 'bug.com'
+  'id2.foolvpn.me': 'bug.com'
+  'bug.com':
+  - 104.18.3.2 #tls
+  - 104.18.2.2 #ntls
