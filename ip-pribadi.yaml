@@ -14,8 +14,14 @@ prof: &prof
       enable: true
       url: http://connectivitycheck.gstatic.com/generate_204
       interval: 300
-      
-global-client-fingerprint: safari
+proxies:
+- name: "dns-out"
+  type: dns
+  udp: true
+  ip-version: ipv4
+  interface-name: eth0
+  routing-mark: 1234      
+global-client-fingerprint: random
 log-level: silent
 routing-mark: 6666
 mode: rule
@@ -106,11 +112,13 @@ proxy-groups:
     - interval: 600
       tolerance: 100
       name: Server UDP
+      proxies: [ dns-out ]
       use: [ udpx, udpy, udpz, udp ]
       type: fallback
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - name: ALL
       include-all-providers: true
+      proxies: [ dns-out ]
       exclude-filter: UDP
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
