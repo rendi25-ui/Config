@@ -10,11 +10,7 @@ prof: &prof
       interval: 300
 proxies:
 - name: "dns-out"
-  type: dns
-  udp: true
-  ip-version: ipv4
-  interface-name: eth0
-  routing-mark: 1234      
+  type: dns      
 global-client-fingerprint: random
 log-level: silent
 routing-mark: 6666
