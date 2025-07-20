@@ -10,7 +10,11 @@ prof: &prof
       interval: 300
 proxies:
 - name: "dns-out"
-  type: dns      
+  type: http
+  server: cp.cloudflare.com
+  port: 80
+  tls: true
+  skip-cert-verify: true
 global-client-fingerprint: random
 log-level: silent
 routing-mark: 6666
