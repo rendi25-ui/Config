@@ -103,13 +103,13 @@ proxy-groups:
 proxy-providers:
   'umum ntls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=bug.com&limit=6&format=raw
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=false&bug=cp.cloudflare.com&limit=6&format=raw
     path: ./online1
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ntls '}
     <<: *prof
   'umum tls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=bug.com&limit=6&format=raw
+      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=cp.cloudflare.com&limit=6&format=raw
     path: ./online2
     exclude-filter: nTLS | NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
@@ -183,16 +183,16 @@ rules:
 - MATCH,UMUM
 
 hosts:
-  'nuclear.biz.id': 'bug.com'
-  'worker.my.id': 'bug.com'
-  'worker.biz.id': 'bug.com'
-  'nautica.my.id': 'bug.com'
-  'nuclear.us.kg': 'bug.com'
-  'tcp.biz.id': 'bug.com'
-  'jeelsboobz.biz.id': 'bug.com'
-  'sg1.foolvpn.me': 'bug.com'
-  'id1.foolvpn.me': 'bug.com'
-  'id2.foolvpn.me': 'bug.com'
-  'bug.com':
+  'nuclear.biz.id': 'cp.cloudflare.com'
+  'worker.my.id': 'cp.cloudflare.com'
+  'worker.biz.id': 'cp.cloudflare.com'
+  'nautica.my.id': 'cp.cloudflare.com'
+  'nuclear.us.kg': 'cp.cloudflare.com'
+  'tcp.biz.id': 'cp.cloudflare.com'
+  'jeelsboobz.biz.id': 'cp.cloudflare.com'
+  'sg1.foolvpn.me': 'cp.cloudflare.com'
+  'id1.foolvpn.me': 'cp.cloudflare.com'
+  'id2.foolvpn.me': 'cp.cloudflare.com'
+  'cp.cloudflare.com':
   - 104.18.3.2 #tls
   - 104.18.2.2 #ntls
