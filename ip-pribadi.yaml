@@ -67,7 +67,7 @@ dns:
     'rule-set:malware,phishing,torrent': rcode://success
 proxy-groups:
     - name: UMUM
-      proxies: [ ALL, UDP, DIRECT ]
+      proxies: [ ALL, DIRECT ]
       use: [ umum ntls, umum tls ]
       type: select
       lazy: true
