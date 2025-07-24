@@ -104,13 +104,13 @@ proxy-groups:
 proxy-providers:
   'umum ntls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=id&cdn=true&tls=false&bug=cp.cloudflare.com&limit=6&format=raw
+      https://sub.garaaa.biz.id/sub/v2rayng?type=vless&bug=cp.cloudflare.com&wildcard=false&tls=flase&country=SG&limit=6
     path: ./online1
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ntls '}
     <<: *prof
   'umum tls':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=id&cdn=true&tls=true&bug=cp.cloudflare.com&limit=6&format=raw
+      https://sub.garaaa.biz.id/sub/v2rayng?type=vless&bug=cp.cloudflare.com&wildcard=false&tls=flase&country=SG&limit=6
     path: ./online2
     exclude-filter: nTLS | NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
