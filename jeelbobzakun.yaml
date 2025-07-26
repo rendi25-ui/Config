@@ -167,12 +167,23 @@ rule-providers:
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Download/Download.yaml" 
     path: ./ruleset/torrent.yaml
     interval: 86400
-  ml: 
-    type: http 
-    format: yaml 
-    behavior: domain 
-    url: "https://raw.githubusercontent.com/helmiau/clashrules/refs/heads/main/rule_provider/Game_MobileLegends_Ports.yaml" 
-    path: ./ruleset/ml.yaml
+  rule_portgames:
+    type: http
+    behavior: classical
+    path: "./rule_provider/rule_portgames.yaml"
+    url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_portgames.yaml
+    interval: 86400
+  rule_Gaming:
+    type: http
+    behavior: classical
+    path: "./rule_provider/rule_gaming.yaml"
+    url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_gaming.yaml
+    interval: 86400
+  rule_games:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_games.yaml
+    path: "./rule_provider/rule_games.yaml"
     interval: 86400
 
 rules:
@@ -181,7 +192,9 @@ rules:
 - IP-CIDR,122.122.0.0/8,DIRECT,no-resolve
 - RULE-SET,phishing,REJECT
 - RULE-SET,malware,REJECT
-- RULE-SET,ml,UMUM
+- RULE-SET,rule_portgames,UMUM
+- RULE-SET,rule_Gaming,UMUM
+- RULE-SET,rule_games,UMUM
 - NETWORK,UDP,UDP
 - GEOSITE,category-porn,porn
 - DST-PORT,123/136/137-139,DIRECT 
