@@ -87,7 +87,6 @@ proxy-groups:
     - interval: 3600
       tolerance: 30
       name: Server UDP
-      proxies: [ dns-out ]
       use: [ udpx, udpy, udpz, udp ]
       type: url-test
       lazy: true
@@ -104,13 +103,13 @@ proxy-groups:
 proxy-providers:
   'umum ntls':
     url: >-
-      https://sub.garaaa.biz.id/sub/v2rayng?type=vless&bug=cp.cloudflare.com&wildcard=false&tls=flase&country=SG&limit=6
+      https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=false&bug=cp.cloudflare.com&limit=6&format=raw
     path: ./online1
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ntls '}
     <<: *prof
   'umum tls':
     url: >-
-      https://sub.garaaa.biz.id/sub/v2rayng?type=vless&bug=cp.cloudflare.com&wildcard=false&tls=flase&country=SG&limit=6
+      https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=true&bug=cp.cloudflare.com&limit=6&format=raw
     path: ./online2
     exclude-filter: nTLS | NTLS
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
@@ -128,12 +127,9 @@ proxy-providers:
     <<: *prof
   'udpx':
     url: >-
-      https://raw.githubusercontent.com/barry-far/V2ray-Config/refs/heads/main/Splitted-By-Protocol/vmess.txt
+      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugx.yaml
     path: ./UDPx
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPx '}
-    dialer-proxy: UMUM
-    exclude-filter: 🇭🇰|ChatGPT
-    exclude-type: "ss|ssr|hysteria|hysteria2"
     <<: *prof
   'udpy':
     url: >-
@@ -142,7 +138,7 @@ proxy-providers:
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPy '}
     dialer-proxy: UMUM
     exclude-filter: 🇭🇰
-    exclude-type: "ss|ssr|hysteria|hysteria2|vless"
+    exclude-type: "ss|ssr|hysteria|hysteria2"
     <<: *prof
   'udpz':
     url: >-
