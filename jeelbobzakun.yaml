@@ -73,7 +73,7 @@ proxy-groups:
       lazy: true
     - name: UDP
       proxies: [ Server UDP, PASS ]
-      use: [ udpy, udpx, udpz, udp]
+      use: [ udpx, udpy, udpz, udp]
       type: select
       lazy: true
     - name: porn
@@ -87,7 +87,7 @@ proxy-groups:
     - interval: 3600
       tolerance: 30
       name: Server UDP
-      use: [ udpy, udpx, udpz, udp ]
+      use: [ udpx, udpy, udpz, udp ]
       type: url-test
       lazy: true
       url: 'http://connectivitycheck.gstatic.com/generate_204'
@@ -127,9 +127,12 @@ proxy-providers:
     <<: *prof
   'udpx':
     url: >-
-      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugx.yaml
+      https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/refs/heads/main/sub.txt
     path: ./UDPx
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-suffix: '| UDPx '}
+    dialer-proxy: UMUM
+    filter: 🇮🇩|🇲🇨|🇸🇬
+    exclude-type: "ss|ssr|hysteria|hysteria2|vless"
     <<: *prof
   'udpy':
     url: >-
