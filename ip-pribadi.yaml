@@ -129,7 +129,7 @@ proxy-providers:
     url: >-
       https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/refs/heads/main/sub.txt
     path: ./UDPx
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-suffix: '| UDPx '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, dialer-proxy: UMUM, network: tcp, smux: {enabled: true}, additional-suffix: '| UDPx '}
     dialer-proxy: UMUM
     filter: 🇮🇩|🇲🇨|🇸🇬
     exclude-type: "ss|ssr|hysteria|hysteria2|vless"
@@ -138,7 +138,7 @@ proxy-providers:
     url: >-
       https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_BASE64.txt
     path: ./UDPy
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-suffix: '| UDPy '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, dialer-proxy: UMUM, network: tcp, smux: {enabled: true}, additional-suffix: '| UDPy '}
     dialer-proxy: UMUM
     filter: 🇮🇩|🇲🇨|🇸🇬
     exclude-type: "ss|ssr|hysteria|hysteria2"
