@@ -127,10 +127,12 @@ proxy-providers:
     <<: *prof
   'udpx':
     url: >-
-      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugx.yaml
+      https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/refs/heads/main/sub.txt
     path: ./UDPx
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-suffix: '| UDPx '}
     dialer-proxy: UMUM
+    filter: 🇮🇩|🇲🇨|🇸🇬
+    exclude-type: "ss|ssr|hysteria|hysteria2|vless"
     <<: *prof
   'udpy':
     url: >-
