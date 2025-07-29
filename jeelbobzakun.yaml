@@ -73,7 +73,7 @@ proxy-groups:
       lazy: true
     - name: UDP
       proxies: [ Server UDP, PASS ]
-      use: [ udpx, udpy, udpz, udp]
+      use: [ udpy, udpx, udpz, udp]
       type: select
       lazy: true
     - name: porn
@@ -87,7 +87,7 @@ proxy-groups:
     - interval: 3600
       tolerance: 30
       name: Server UDP
-      use: [ udpx, udpy, udpz, udp ]
+      use: [ udpy, udpx, udpz, udp ]
       type: url-test
       lazy: true
       url: 'http://connectivitycheck.gstatic.com/generate_204'
