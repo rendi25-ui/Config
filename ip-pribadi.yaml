@@ -108,11 +108,11 @@ proxy-providers:
     path: "./AKUN"
     override: {skip-cert-verify: true, udp: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-suffix: '| x-akun '}
     health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}
-  'udp':
+  'udpy':
     url: >-
-      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
-    path: ./UDP
-    override: {skip-cert-verify: true, udp: true, packet-encoding: xudp, dialer-proxy: UMUM, network: tcp, smux: {enabled: true}, additional-suffix: '| UDP '}
+      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugy.yaml
+    path: ./UDPy
+    override: {skip-cert-verify: true, udp: true, packet-encoding: xudp, dialer-proxy: UMUM, network: tcp, smux: {enabled: true}, additional-suffix: '| UDPy '}
     <<: *prof
   'udpx':
     url: >-
