@@ -75,7 +75,7 @@ proxy-groups:
       lazy: true
     - interval: 3600
       name: UDP
-      use: [ udpx, udp ]
+      use: [ udpx, udpy ]
       type: load-balance
       strategy: consistent-hashing
       lazy: true
