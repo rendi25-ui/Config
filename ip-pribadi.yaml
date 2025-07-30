@@ -82,7 +82,7 @@ proxy-groups:
     - interval: 3600
       tolerance: 30
       name: UDP
-      use: [ udpx ]
+      use: [ udpx, udp ]
       type: url-test
       lazy: true
       url: 'http://connectivitycheck.gstatic.com/generate_204'
@@ -114,13 +114,19 @@ proxy-providers:
     path: "./AKUN"
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-suffix: '| x-akun '}
     health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}
+  'udp':
+    url: >-
+      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
+    path: ./UDP
+    override: {skip-cert-verify: true, packet-encoding: xudp, dialer-proxy: UMUM, network: tcp, smux: {enabled: true}, additional-suffix: '| UDP '}
+    <<: *prof
   'udpx':
     url: >-
       https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/refs/heads/main/sub.txt
     path: ./UDPx
     override: {skip-cert-verify: true, packet-encoding: xudp, dialer-proxy: UMUM, network: tcp, smux: {enabled: true}, additional-suffix: '| UDPx '}
     dialer-proxy: UMUM
-    exclude-filter: Project
+    filter: 🇸🇬
     exclude-type: "ss|ssr|hysteria|hysteria2|vless|trojan"
     <<: *prof
 
