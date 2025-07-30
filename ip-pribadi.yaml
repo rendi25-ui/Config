@@ -1,7 +1,6 @@
 #abcd
 prof: &prof
     type: http
-    exclude-filter: PDK
     size-limit: 15000
     interval: 3600
     health-check:
@@ -96,12 +95,13 @@ proxy-providers:
       https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=false&bug=cp.cloudflare.com&limit=6&format=raw
     path: ./online1
     override: {skip-cert-verify: true, udp: false, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-suffix: '| ntls '}
+    exclude-filter: PDK | AKILE
     <<: *prof
   'umum tls':
     url: >-
       https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=true&bug=cp.cloudflare.com&limit=6&format=raw
     path: ./online2
-    exclude-filter: nTLS | NTLS
+    exclude-filter: nTLS | NTLS | PDK | AKILE
     override: {skip-cert-verify: true, udp: false, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-suffix: '| tls '}
     <<: *prof
   'akun':
