@@ -120,7 +120,7 @@ proxy-providers:
     path: ./UDPx
     override: {skip-cert-verify: true, packet-encoding: xudp, dialer-proxy: UMUM, network: tcp, smux: {enabled: true}, additional-suffix: '| UDPx '}
     dialer-proxy: UMUM
-    filter: 🇸🇬
+    exclude-filter: Project
     exclude-type: "ss|ssr|hysteria|hysteria2|vless|trojan"
     <<: *prof
 
