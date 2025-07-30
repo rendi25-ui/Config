@@ -8,13 +8,6 @@ prof: &prof
       lazy: true
       url: http://connectivitycheck.gstatic.com/generate_204
       interval: 300
-proxies:
-- name: "dns-out"
-  type: http
-  server: cp.cloudflare.com
-  port: 80
-  tls: true
-  skip-cert-verify: true
 global-client-fingerprint: random
 log-level: silent
 routing-mark: 6666
@@ -80,15 +73,14 @@ proxy-groups:
       type: select
       lazy: true
     - interval: 3600
-      tolerance: 30
       name: UDP
       use: [ udpx, udp ]
-      type: url-test
+      type: load-balance
+      strategy: consistent-hashing
       lazy: true
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - name: ALL
       include-all-providers: true
-      proxies: [ dns-out ]
       exclude-filter: UDP
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
