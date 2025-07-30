@@ -64,6 +64,7 @@ proxy-groups:
       use: [ umum ntls, umum tls ]
       type: select
       lazy: true
+      disable-udp: true
     - name: porn
       proxies: [ REJECT, PASS ]
       type: select
@@ -79,6 +80,7 @@ proxy-groups:
       strategy: consistent-hashing
       lazy: true
       url: 'http://connectivitycheck.gstatic.com/generate_204'
+      disable-udp: false
     - name: ALL
       include-all-providers: true
       exclude-filter: UDP
@@ -92,31 +94,31 @@ proxy-providers:
     url: >-
       https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=false&bug=cp.cloudflare.com&limit=6&format=raw
     path: ./online1
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-suffix: '| ntls '}
+    override: {skip-cert-verify: true, udp: false, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-suffix: '| ntls '}
     <<: *prof
   'umum tls':
     url: >-
       https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=true&bug=cp.cloudflare.com&limit=6&format=raw
     path: ./online2
     exclude-filter: nTLS | NTLS
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-suffix: '| tls '}
+    override: {skip-cert-verify: true, udp: false, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-suffix: '| tls '}
     <<: *prof
   'akun':
     type: file
     path: "./AKUN"
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-suffix: '| x-akun '}
+    override: {skip-cert-verify: true, udp: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-suffix: '| x-akun '}
     health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}
   'udp':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
     path: ./UDP
-    override: {skip-cert-verify: true, packet-encoding: xudp, dialer-proxy: UMUM, network: tcp, smux: {enabled: true}, additional-suffix: '| UDP '}
+    override: {skip-cert-verify: true, udp: true, packet-encoding: xudp, dialer-proxy: UMUM, network: tcp, smux: {enabled: true}, additional-suffix: '| UDP '}
     <<: *prof
   'udpx':
     url: >-
       https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/refs/heads/main/sub.txt
     path: ./UDPx
-    override: {skip-cert-verify: true, packet-encoding: xudp, dialer-proxy: UMUM, network: tcp, smux: {enabled: true}, additional-suffix: '| UDPx '}
+    override: {skip-cert-verify: true, udp: true, packet-encoding: xudp, dialer-proxy: UMUM, network: tcp, smux: {enabled: true}, additional-suffix: '| UDPx '}
     dialer-proxy: UMUM
     filter: 🇸🇬
     exclude-type: "ss|ssr|hysteria|hysteria2|vless|trojan"
