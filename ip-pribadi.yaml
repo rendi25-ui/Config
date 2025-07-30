@@ -1,6 +1,7 @@
 #abcd
 prof: &prof
     type: http
+    exclude-filter: PDK
     size-limit: 15000
     interval: 3600
     health-check:
