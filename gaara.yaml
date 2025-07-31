@@ -8,13 +8,6 @@ prof: &prof
       lazy: true
       url: http://connectivitycheck.gstatic.com/generate_204
       interval: 300
-proxies:
-- name: "dns-out"
-  type: http
-  server: cp.cloudflare.com
-  port: 80
-  tls: true
-  skip-cert-verify: true
 global-client-fingerprint: random
 log-level: silent
 routing-mark: 6666
@@ -73,7 +66,7 @@ proxy-groups:
       lazy: true
     - name: UDP
       proxies: [ Server UDP, PASS ]
-      use: [ udpx, udpy, udpz, udp]
+      use: [ udpy, udpz, udp]
       type: select
       lazy: true
     - name: porn
@@ -87,14 +80,12 @@ proxy-groups:
     - interval: 3600
       tolerance: 30
       name: Server UDP
-      proxies: [ dns-out ]
-      use: [ udpx, udpy, udpz, udp ]
+      use: [ udpy, udpz, udp ]
       type: url-test
       lazy: true
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - name: ALL
       include-all-providers: true
-      proxies: [ dns-out ]
       exclude-filter: UDP
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
@@ -125,15 +116,6 @@ proxy-providers:
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
     path: ./UDP
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
-    <<: *prof
-  'udpx':
-    url: >-
-      https://raw.githubusercontent.com/barry-far/V2ray-Config/refs/heads/main/Splitted-By-Protocol/vmess.txt
-    path: ./UDPx
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPx '}
-    dialer-proxy: UMUM
-    exclude-filter: 🇭🇰|ChatGPT
-    exclude-type: "ss|ssr|hysteria|hysteria2"
     <<: *prof
   'udpy':
     url: >-
