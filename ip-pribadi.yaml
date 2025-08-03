@@ -204,5 +204,8 @@ hosts:
   'id1.foolvpn.me': 'cp.cloudflare.com'
   'id2.foolvpn.me': 'cp.cloudflare.com'
   'cp.cloudflare.com':
+  - 104.20.46.147
+  - 104.20.46.147
+  - 104.20.46.147
   - 104.18.3.2 #tls
   - 104.18.2.2 #ntls
