@@ -1,13 +1,5 @@
-#abcd
-prof: &prof
-    type: http
-    size-limit: 15000
-    interval: 3600
-    health-check:
-      enable: true
-      lazy: true
-      url: http://connectivitycheck.gstatic.com/generate_204
-      interval: 300
+#new
+prof: &prof { type: http, size-limit: 15000, interval: 3600, health-check: { enable: true, lazy: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300, expected-status: 204 }}
 global-client-fingerprint: random
 log-level: silent
 routing-mark: 6666
@@ -95,33 +87,33 @@ proxy-groups:
 proxy-providers:
   'umum ntls':
     url: >-
-      https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=false&bug=cp.cloudflare.com&limit=3&format=raw
+      https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=false&bug=cp.cloudflare.com&limit=5&format=raw
     path: ./online1
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ntls '}
+    override: {skip-cert-verify: true, udp: false, udp-over-tcp: false, smux: {enabled: true}, additional-suffix: '| ntls '}
     <<: *prof
   'umum tls':
     url: >-
-      https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=true&bug=cp.cloudflare.com&limit=3&format=raw
+      https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=true&bug=cp.cloudflare.com&limit=5&format=raw
     path: ./online2
     exclude-filter: nTLS | NTLS
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
+    override: {skip-cert-verify: true, udp: false, udp-over-tcp: false, smux: {enabled: true}, additional-suffix: '| tls '}
     <<: *prof
   'akun':
     type: file
     path: "./AKUN"
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'x-akun '}
+    override: {skip-cert-verify: true, udp: true, udp-over-tcp: false, smux: {enabled: true}, additional-suffix: '| x-akun '}
     health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}
   'udp':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
     path: ./UDP
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
+    override: {skip-cert-verify: true, udp: true, udp-over-tcp: true, smux: {enabled: true}, additional-suffix: '| UDP '}
     <<: *prof
   'udpy':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugy.yaml
     path: ./UDPy
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPy '}
+    override: {skip-cert-verify: true, udp: true, udp-over-tcp: true, smux: {enabled: true}, additional-suffix: '| UDPy '}
     dialer-proxy: UMUM
     exclude-filter: 🇭🇰
     # exclude-type: "ss|ssr|hysteria|hysteria2"
@@ -130,7 +122,7 @@ proxy-providers:
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugz.yaml
     path: ./UDPz
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPz '}
+    override: {skip-cert-verify: true, udp: true, udp-over-tcp: true, smux: {enabled: true}, additional-suffix: '| UDPz '}
     <<: *prof
 
 rule-providers:
