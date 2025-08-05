@@ -1,5 +1,13 @@
-#rule
-prof: &prof { type: http, proxy: UDP, size-limit: 15000, interval: 3600, health-check: { enable: true, lazy: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300, expected-status: 204 }}
+#abcd
+prof: &prof
+    type: http
+    size-limit: 15000
+    interval: 3600
+    health-check:
+      enable: true
+      lazy: true
+      url: http://connectivitycheck.gstatic.com/generate_204
+      interval: 300
 global-client-fingerprint: random
 log-level: silent
 routing-mark: 6666
@@ -87,42 +95,40 @@ proxy-groups:
 proxy-providers:
   'umum ntls':
     url: >-
-      https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=false&bug=cp.cloudflare.com&limit=5&format=raw
+      https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=false&bug=cp.cloudflare.com&limit=6&format=raw
     path: ./online1
-    override: {skip-cert-verify: true, udp: false, udp-over-tcp: false, smux: {enabled: true}, additional-suffix: '| ntls '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ntls '}
     <<: *prof
   'umum tls':
     url: >-
-      https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=true&bug=cp.cloudflare.com&limit=5&format=raw
+      https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=true&bug=cp.cloudflare.com&limit=6&format=raw
     path: ./online2
     exclude-filter: nTLS | NTLS
-    override: {skip-cert-verify: true, udp: false, udp-over-tcp: false, smux: {enabled: true}, additional-suffix: '| tls '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
     <<: *prof
   'akun':
     type: file
     path: "./AKUN"
-    override: {skip-cert-verify: true, udp: true, udp-over-tcp: false, smux: {enabled: true}, additional-suffix: '| x-akun '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'x-akun '}
     health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}
   'udp':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
     path: ./UDP
-    override: {skip-cert-verify: true, udp: true, udp-over-tcp: true, smux: {enabled: true}, additional-suffix: '| UDP '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
     <<: *prof
   'udpy':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugy.yaml
     path: ./UDPy
-    override: {skip-cert-verify: true, udp: true, udp-over-tcp: true, smux: {enabled: true}, additional-suffix: '| UDPy '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPy '}
     dialer-proxy: UMUM
-    exclude-filter: 🇭🇰
-    # exclude-type: "ss|ssr|hysteria|hysteria2"
     <<: *prof
   'udpz':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugz.yaml
     path: ./UDPz
-    override: {skip-cert-verify: true, udp: true, udp-over-tcp: true, smux: {enabled: true}, additional-suffix: '| UDPz '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPz '}
     <<: *prof
 
 rule-providers:
@@ -167,22 +173,20 @@ rule-providers:
     interval: 86400
 
 rules:
-- IN-TYPE,INNER,UDP
-- GEOIP,telegram,UDP,no-resolve
+- RULE-SET,torrent,REJECT
 - IP-CIDR,127.0.0.0/8,DIRECT
 - IP-CIDR,122.122.0.0/8,DIRECT,no-resolve
-- RULE-SET,torrent,REJECT
 - RULE-SET,phishing,REJECT
 - RULE-SET,malware,REJECT
+- RULE-SET,rule_portgames,UMUM
+- RULE-SET,rule_Gaming,UMUM
+- RULE-SET,rule_games,UMUM
 - NETWORK,UDP,UDP
 - GEOSITE,category-porn,porn
 - DST-PORT,123/136/137-139,DIRECT 
 - SRC-PORT,123/136/137-139,DIRECT,udp
 - AND,((NETWORK,UDP),(OR,((DST-PORT,443/80),(GEOSITE,youtube)))),REJECT
 - AND,((OR,((GEOSITE,instagram),(GEOSITE,facebook))),(NETWORK,UDP)),REJECT
-- AND,((RULE-SET,rule_Gaming),(NETWORK,UDP)),REJECT
-- AND,((RULE-SET,rule_games),(NETWORK,UDP)),REJECT
-- AND,((RULE-SET,rule_portgames),(NETWORK,UDP)),REJECT
 - AND,((GEOSITE,category-ads-all),(NOT,((DOMAIN-SUFFIX,googlesyndication.com)))),IKLANWEB
 - MATCH,UMUM
 
