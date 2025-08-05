@@ -119,12 +119,12 @@ proxy-providers:
     <<: *prof
   'udpy':
     url: >-
-      https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_BASE64.txt
+      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugy.yaml
     path: ./UDPy
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPy '}
     dialer-proxy: UMUM
-    exclude-filter: 🇭🇰
-    exclude-type: "ss|ssr|hysteria|hysteria2|vless"
+   # exclude-filter: 🇭🇰
+   # exclude-type: "ss|ssr|hysteria|hysteria2|vless"
     <<: *prof
   'udpz':
     url: >-
