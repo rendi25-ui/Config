@@ -1,4 +1,4 @@
-#rules
+#rule
 prof: &prof { type: http, size-limit: 15000, interval: 3600, health-check: { enable: true, lazy: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300, expected-status: 204 }}
 global-client-fingerprint: random
 log-level: silent
@@ -168,7 +168,7 @@ rule-providers:
 
 rules:
 - IN-TYPE,INNER,UDP
-- GEOIP,telegram,UDP
+- GEOIP,telegram,UDP,no-resolve
 - IP-CIDR,127.0.0.0/8,DIRECT
 - IP-CIDR,122.122.0.0/8,DIRECT,no-resolve
 - RULE-SET,torrent,REJECT
