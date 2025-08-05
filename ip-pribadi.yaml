@@ -1,4 +1,4 @@
-#news
+#rule
 prof: &prof { type: http, size-limit: 15000, interval: 3600, health-check: { enable: true, lazy: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300, expected-status: 204 }}
 global-client-fingerprint: random
 log-level: silent
@@ -173,15 +173,14 @@ rules:
 - RULE-SET,torrent,REJECT
 - RULE-SET,phishing,REJECT
 - RULE-SET,malware,REJECT
-- RULE-SET,rule_portgames,UMUM
-- RULE-SET,rule_Gaming,UMUM
-- RULE-SET,rule_games,UMUM
 - NETWORK,UDP,UDP
 - GEOSITE,category-porn,porn
 - DST-PORT,123/136/137-139,DIRECT 
 - SRC-PORT,123/136/137-139,DIRECT,udp
 - AND,((NETWORK,UDP),(OR,((DST-PORT,443/80),(GEOSITE,youtube)))),REJECT
 - AND,((OR,((GEOSITE,instagram),(GEOSITE,facebook))),(NETWORK,UDP)),REJECT
+- AND,((OR,((RULE-SET,rule_games),(RULE-SET,rule_Gaming))),(NETWORK,UDP)),REJECT
+- AND,((RULE-SET,rule_portgames),(NETWORK,UDP)),REJECT
 - AND,((GEOSITE,category-ads-all),(NOT,((DOMAIN-SUFFIX,googlesyndication.com)))),IKLANWEB
 - MATCH,UMUM
 
