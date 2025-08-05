@@ -1,4 +1,4 @@
-#rule
+#rules
 prof: &prof { type: http, size-limit: 15000, interval: 3600, health-check: { enable: true, lazy: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300, expected-status: 204 }}
 global-client-fingerprint: random
 log-level: silent
@@ -168,6 +168,7 @@ rule-providers:
 
 rules:
 - IN-TYPE,INNER,UDP
+- GEOIP,telegram,UDP
 - IP-CIDR,127.0.0.0/8,DIRECT
 - IP-CIDR,122.122.0.0/8,DIRECT,no-resolve
 - RULE-SET,torrent,REJECT
@@ -179,7 +180,8 @@ rules:
 - SRC-PORT,123/136/137-139,DIRECT,udp
 - AND,((NETWORK,UDP),(OR,((DST-PORT,443/80),(GEOSITE,youtube)))),REJECT
 - AND,((OR,((GEOSITE,instagram),(GEOSITE,facebook))),(NETWORK,UDP)),REJECT
-- AND,((OR,((RULE-SET,rule_games),(RULE-SET,rule_Gaming))),(NETWORK,UDP)),REJECT
+- AND,((RULE-SET,rule_Gaming),(NETWORK,UDP)),REJECT
+- AND,((RULE-SET,rule_games),(NETWORK,UDP)),REJECT
 - AND,((RULE-SET,rule_portgames),(NETWORK,UDP)),REJECT
 - AND,((GEOSITE,category-ads-all),(NOT,((DOMAIN-SUFFIX,googlesyndication.com)))),IKLANWEB
 - MATCH,UMUM
