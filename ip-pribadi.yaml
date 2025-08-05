@@ -1,5 +1,5 @@
 #rule
-prof: &prof { type: http, size-limit: 15000, interval: 3600, health-check: { enable: true, lazy: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300, expected-status: 204 }}
+prof: &prof { type: http, proxy: UDP, size-limit: 15000, interval: 3600, health-check: { enable: true, lazy: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300, expected-status: 204 }}
 global-client-fingerprint: random
 log-level: silent
 routing-mark: 6666
