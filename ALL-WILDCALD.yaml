@@ -112,7 +112,7 @@ proxy-providers:
     <<: *prof
   'vidio':
     url: >-
-      https://prod-test.jdevcloud.com/api/vless?cc=sg&cdn=true&tls=true&bug=quiz.vidio.com&limit=1&format=vless&subdomain=quiz.vidio.com
+      https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=true&bug=quiz.vidio.com&limit=20&format=vless&subdomain=quiz.vidio.com
     path: ./vidio
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'vidio '}
     <<: *prof
