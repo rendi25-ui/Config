@@ -119,7 +119,7 @@ proxy-providers:
     <<: *prof
   'udpy':
     url: >-
-      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugy.yaml
+      https://raw.githubusercontent.com/sevcator/5ubscrpt10n/refs/heads/main/protocols/vm.txt
     path: ./UDPy
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPy '}
     dialer-proxy: UMUM
