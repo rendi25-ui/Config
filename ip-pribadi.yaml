@@ -123,7 +123,7 @@ proxy-providers:
     path: ./UDPy
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPy '}
     dialer-proxy: UMUM
-   # exclude-filter: 🇭🇰
+   # exclude-filter: 🇭🇰|Project|🅼🅴🅷🅳🅸
    # exclude-type: "ss|ssr|hysteria|hysteria2|vless"
     <<: *prof
   'udpz':
