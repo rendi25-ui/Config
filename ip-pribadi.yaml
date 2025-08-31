@@ -1,7 +1,8 @@
-#abcde
+#abcdef
 prof: &prof
     type: http
     interval: 1200
+    size-limit: 15000
     health-check:
       enable: true
       lazy: true
@@ -65,7 +66,7 @@ proxy-groups:
       lazy: true
     - name: UDP
       proxies: [ Server UDP, PASS ]
-      use: [ udpy, udpz, udp]
+      use: [ udp, udpy, udpz ]
       type: select
       lazy: true
     - name: porn
@@ -79,7 +80,7 @@ proxy-groups:
     - interval: 3600
       tolerance: 30
       name: Server UDP
-      use: [ udpy, udpz, udp ]
+      use: [ udp, udpy, udpz ]
       type: url-test
       lazy: true
       url: 'http://connectivitycheck.gstatic.com/generate_204'
@@ -118,11 +119,11 @@ proxy-providers:
     <<: *prof
   'udpy':
     url: >-
-      https://raw.githubusercontent.com/sevcator/5ubscrpt10n/refs/heads/main/protocols/vm.txt
+      https://vpn.fail/free-proxy/v2ray
     path: ./UDPy
     override: {skip-cert-verify: true, dialer-proxy: UMUM, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPy '}
     dialer-proxy: UMUM
-    exclude-filter: 🇭🇰|🅼🅴🅷🅳🅸|Project|🔥
+    exclude-filter: 🇭🇰
     exclude-type: "ss|ssr|hysteria|hysteria2|vless"
     <<: *prof
   'udpz':
@@ -131,7 +132,7 @@ proxy-providers:
     path: ./UDPz
     override: {skip-cert-verify: true, dialer-proxy: UMUM, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPz '}
     dialer-proxy: UMUM
-    filter: 🇮🇩|🇲🇨|🇸🇬|🇦🇺|🇻🇳|🇯🇵
+    exclude-filter: 🇭🇰
     exclude-type: "ss|ssr|hysteria|hysteria2|vless"
     <<: *prof
 
