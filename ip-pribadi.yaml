@@ -1,7 +1,7 @@
 #abcde
 prof: &prof
     type: http
-    interval: 3600
+    interval: 600
     health-check:
       enable: true
       lazy: true
