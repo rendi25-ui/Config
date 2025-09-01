@@ -1,6 +1,7 @@
-#abcdef
+#abcde
 prof: &prof
     type: http
+    proxy: UDP
     interval: 1200
     size-limit: 15000
     health-check:
