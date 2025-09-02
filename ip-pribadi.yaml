@@ -1,8 +1,8 @@
-#abcde
+#abc
 prof: &prof
     type: http
     proxy: UDP
-    interval: 1200
+    interval: 3600
     size-limit: 15000
     health-check:
       enable: true
@@ -61,7 +61,7 @@ dns:
     'rule-set:malware,phishing,torrent': rcode://success
 proxy-groups:
     - name: UMUM
-      proxies: [ ALL, UDP, DIRECT ]
+      proxies: [ ALL, DIRECT ]
       use: [ umum ntls, umum tls ]
       type: select
       lazy: true
@@ -107,7 +107,7 @@ proxy-groups:
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - name: ALL
       include-all-providers: true
-      exclude-filter: UDP
+      exclude-filter: UDPx
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
       interval: 3600
