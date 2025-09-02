@@ -1,9 +1,8 @@
-#abcd
+#a
 prof: &prof
     type: http
-    proxy: UDPx
+    proxy: UDP
     interval: 3600
-    size-limit: 15000
     health-check:
       enable: true
       lazy: true
@@ -62,11 +61,8 @@ dns:
 proxy-groups:
     - name: UMUM
       proxies: [ ALL, DIRECT ]
-      use: [ umum ntls, umum tls ]
-      type: select
-      lazy: true
-    - name: UDP
-      proxies: [ Server UDP, PASS, UDPx, UDPy, UDPz ]
+      include-all-providers: true
+      exclude-filter: UDPx|UDPa
       type: select
       lazy: true
     - name: porn
@@ -79,82 +75,37 @@ proxy-groups:
       lazy: true
     - interval: 3600
       tolerance: 30
-      name: Server UDP
-      proxies: [ UDPx, UDPy, UDPz ]
+      name: UDP
+      use: [ udp ]
       type: url-test
-      lazy: true
-      url: 'http://connectivitycheck.gstatic.com/generate_204'
-    - interval: 3600
-      tolerance: 30
-      name: UDPx
-      use: [ udpx ]
-      type: url-test
-      lazy: true
-      url: 'http://connectivitycheck.gstatic.com/generate_204'
-    - interval: 3600
-      tolerance: 30
-      name: UDPy
-      use: [ udpy ]
-      type: url-test
-      lazy: true
-      url: 'http://connectivitycheck.gstatic.com/generate_204'
-    - interval: 3600
-      tolerance: 30
-      name: UDPz
-      use: [ udpz ]
-      type: url-test
-      lazy: true
+      lazy: false
       url: 'http://connectivitycheck.gstatic.com/generate_204'
     - name: ALL
       include-all-providers: true
-      exclude-filter: UDPx
+      exclude-filter: UDPx|UDPa
       type: url-test
       url: 'http://connectivitycheck.gstatic.com/generate_204'
       interval: 3600
       tolerance: 30
       lazy: true
 proxy-providers:
-  'umum ntls':
-    url: >-
-      https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=false&bug=cp.cloudflare.com&limit=6&format=raw
-    path: ./online1
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'ntls '}
-    <<: *prof
-  'umum tls':
-    url: >-
-      https://siren.cloudaccess.host/api/vless?cc=sg&cdn=true&tls=true&bug=cp.cloudflare.com&limit=6&format=raw
-    path: ./online2
-    exclude-filter: nTLS | NTLS
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'tls '}
-    <<: *prof
   'akun':
     type: file
     path: "./AKUN"
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'x-akun '}
     health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}
-  'udpx':
+  'udp':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
-    path: ./UDPx
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPx '}
-    <<: *prof
-  'udpy':
-    url: >-
-      https://vpn.fail/free-proxy/v2ray
-    path: ./UDPy
-    override: {skip-cert-verify: true, dialer-proxy: UDPx, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPy '}
-    dialer-proxy: UDPx
-    exclude-filter: 🇭🇰
-    exclude-type: "ss|ssr|hysteria|hysteria2|vless"
+    path: ./UDP
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPa '}
     <<: *prof
   'udpz':
     url: >-
-      https://raw.githubusercontent.com/hans-thomas/v2ray-subscription/refs/heads/master/servers.txt
+      https://www.v2nodes.com/subscriptions/country/all/?key=00C257A434B4BBB
     path: ./UDPz
-    override: {skip-cert-verify: true, dialer-proxy: UDPx, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPz '}
-    dialer-proxy: UDPx
-    exclude-filter: 🇭🇰
-    exclude-type: "ss|ssr|hysteria|hysteria2|vless"
+    override: {skip-cert-verify: true, dialer-proxy: UDP, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPz '}
+    dialer-proxy: UDP
     <<: *prof
 
 rule-providers:
@@ -199,6 +150,8 @@ rule-providers:
     interval: 86400
 
 rules:
+- NETWORK,TCP,UMUM
+- NETWORK,UDP,UDP
 - RULE-SET,torrent,REJECT
 - IP-CIDR,127.0.0.0/8,DIRECT
 - IP-CIDR,122.122.0.0/8,DIRECT,no-resolve
@@ -207,7 +160,6 @@ rules:
 - RULE-SET,rule_portgames,UMUM
 - RULE-SET,rule_Gaming,UMUM
 - RULE-SET,rule_games,UMUM
-- NETWORK,UDP,UDP
 - GEOSITE,category-porn,porn
 - DST-PORT,123/136/137-139,DIRECT 
 - SRC-PORT,123/136/137-139,DIRECT,udp
