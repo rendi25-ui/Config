@@ -1,4 +1,4 @@
-#a
+#abc
 prof: &prof
     type: http
     proxy: UDP
@@ -51,8 +51,10 @@ dns:
   nameserver:
     - 'https://8.8.8.8/dns-query#ecs=223.5.5.0/24&ecs-override=true'
     - 'https://1.1.1.1/dns-query#ecs=223.5.5.0/24&ecs-override=true'
-  fallback: [ 'system', 1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4 ]
-  proxy-server-nameserver: [ 'system', 'https://mozilla.cloudflare-dns.com/dns-query#DNS&h3=true', 'https://mozilla.cloudflare-dns.com/dns-query#skip-cert-verify=true' ]
+    - 'dhcp://en0'
+    - 'dhcp://system'
+  fallback: [ 'system', 'dhcp://en0', 'dhcp://system', 1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4 ]
+  proxy-server-nameserver: [ 'system', 'dhcp://system', 'dhcp://en0', 'https://mozilla.cloudflare-dns.com/dns-query#DNS&h3=true', 'https://mozilla.cloudflare-dns.com/dns-query#skip-cert-verify=true' ]
   fallback-filter:
     geosite: [ gfw ]
   nameserver-policy:
@@ -76,7 +78,7 @@ proxy-groups:
     - interval: 3600
       tolerance: 30
       name: UDP
-      use: [ udp ]
+      use: [ udpa, udpx ]
       type: url-test
       lazy: false
       url: 'http://connectivitycheck.gstatic.com/generate_204'
@@ -94,11 +96,17 @@ proxy-providers:
     path: "./AKUN"
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'x-akun '}
     health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}
-  'udp':
+  'udpa':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
-    path: ./UDP
+    path: ./UDPa
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPa '}
+    <<: *prof
+  'udpx':
+    url: >-
+      https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugx.yaml
+    path: ./UDPx
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPx '}
     <<: *prof
   'udpz':
     url: >-
