@@ -66,8 +66,7 @@ proxy-groups:
       type: select
       lazy: true
     - name: UDP
-      proxies: [ Server UDP, PASS ]
-      use: [ udp, udpy, udpz ]
+      proxies: [ Server UDP, PASS, UDPx, UDPy, UDPz ]
       type: select
       lazy: true
     - name: porn
@@ -81,7 +80,28 @@ proxy-groups:
     - interval: 3600
       tolerance: 30
       name: Server UDP
-      use: [ udp, udpy, udpz ]
+      proxies: [ UDPx, UDPy, UDPz ]
+      type: url-test
+      lazy: true
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+    - interval: 3600
+      tolerance: 30
+      name: UDPx
+      use: [ udpx ]
+      type: url-test
+      lazy: true
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+    - interval: 3600
+      tolerance: 30
+      name: UDPy
+      use: [ udpy ]
+      type: url-test
+      lazy: true
+      url: 'http://connectivitycheck.gstatic.com/generate_204'
+    - interval: 3600
+      tolerance: 30
+      name: UDPz
+      use: [ udpz ]
       type: url-test
       lazy: true
       url: 'http://connectivitycheck.gstatic.com/generate_204'
@@ -112,11 +132,11 @@ proxy-providers:
     path: "./AKUN"
     override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'x-akun '}
     health-check: {enable: true, url: http://connectivitycheck.gstatic.com/generate_204, interval: 300}
-  'udp':
+  'udpx':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
-    path: ./UDP
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDP '}
+    path: ./UDPx
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPx '}
     <<: *prof
   'udpy':
     url: >-
