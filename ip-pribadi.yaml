@@ -1,4 +1,4 @@
-#abc
+#sg
 prof: &prof
     type: http
     proxy: UDP
@@ -110,7 +110,7 @@ proxy-providers:
     <<: *prof
   'udpz':
     url: >-
-      https://www.v2nodes.com/subscriptions/country/all/?key=00C257A434B4BBB
+      https://www.v2nodes.com/subscriptions/country/sg/?key=00C257A434B4BBB
     path: ./UDPz
     override: {skip-cert-verify: true, dialer-proxy: UDP, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPz '}
     dialer-proxy: UDP
