@@ -1,4 +1,4 @@
-#sg
+#sghosts
 prof: &prof
     type: http
     proxy: UDP
@@ -113,7 +113,6 @@ proxy-providers:
       https://www.v2nodes.com/subscriptions/country/sg/?key=00C257A434B4BBB
     path: ./UDPz
     override: {skip-cert-verify: true, dialer-proxy: UDP, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPz '}
-    dialer-proxy: UDP
     <<: *prof
 
 rule-providers:
@@ -177,6 +176,8 @@ rules:
 - MATCH,UMUM
 
 hosts:
+  'store.steampowered.com': 'cp.cloudflare.com'
+  '+.cristiano.name.ng': 'cp.cloudflare.com'
   'nuclear.biz.id': 'cp.cloudflare.com'
   'worker.my.id': 'cp.cloudflare.com'
   'worker.biz.id': 'cp.cloudflare.com'
