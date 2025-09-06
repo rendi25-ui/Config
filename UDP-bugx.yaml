@@ -1,3 +1,2 @@
-trojan://t.me%2Ffoolvpn@cp.cloudflare.com:443?path=%2Ftrojan-udp&security=tls&host=sg1.foolvpn.me&type=ws&sni=sg1.foolvpn.me#trojan%20sg
-trojan://t.me%2Ffoolvpn@cp.cloudflare.com:443?path=%2Ftrojan-udp&security=tls&host=id1.foolvpn.me&type=ws&sni=id1.foolvpn.me#trojan%20id1
-trojan://t.me%2Ffoolvpn@cp.cloudflare.com:443?path=%2Ftrojan-udp&security=tls&host=id2.foolvpn.me&type=ws&sni=id2.foolvpn.me#trojan%20id2
+vless://aec99570-8adc-11f0-b531-205c6d5f5d78@cp.cloudflare.com:443?path=%2Fvlws&security=tls&encryption=none&host=asia1.fufo.org&type=ws&sni=cp.cloudflare.com#ASIA%20Vless-WS%282025-09-13%29
+vless://aec99570-8adc-11f0-b531-205c6d5f5d78@cp.cloudflare.com:80?path=%2Fvlws&security=none&encryption=none&host=asia1.fufo.org&type=ws#ASIA%20Vless-WS%20NTLS%282025-09-13%29
