@@ -1,7 +1,6 @@
 #sghosts
 prof: &prof
     type: http
-    proxy: UDP
     interval: 3600
     health-check:
       enable: true
@@ -100,13 +99,13 @@ proxy-providers:
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml
     path: ./UDPa
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPa '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: udp, smux: {enabled: true}, additional-prefix: 'UDPa '}
     <<: *prof
   'udpx':
     url: >-
       https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bugx.yaml
     path: ./UDPx
-    override: {skip-cert-verify: true, packet-encoding: xudp, network: tcp, smux: {enabled: true}, additional-prefix: 'UDPx '}
+    override: {skip-cert-verify: true, packet-encoding: xudp, network: udp, smux: {enabled: true}, additional-prefix: 'UDPx '}
     <<: *prof
   'udpz':
     url: >-
