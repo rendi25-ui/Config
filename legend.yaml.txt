@@ -1,0 +1,228 @@
+# url 里填写自己的订阅,名称不能重复
+proxy-providers:
+  provider1:
+    url: "https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml"
+    type: http
+    interval: 86400
+    health-check: {enable: true,url: "https://www.gstatic.com/generate_204",interval: 300}
+    override:
+      additional-prefix: "[provider1]"
+
+  provider3:
+    url: "https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_BASE64.txt"
+    type: http
+    interval: 86400
+    health-check: {enable: true,url: "https://www.gstatic.com/generate_204",interval: 300}
+    override:
+      additional-prefix: "[provider3]"
+      dialer-proxy: "lemot"
+    exclude-type: vless
+
+hosts:
+  'cp.cloudflare.com':
+  - 104.18.53.42 #byu ilped
+  - 104.18.51.6 #byu ilped
+  - 104.20.46.147 #xlvidio
+  - 172.66.144.39 #xlvidio
+  - 104.18.3.2 #wifiid
+  - 104.18.2.2 #wifiid
+
+mixed-port: 7890
+ipv6: true
+allow-lan: true
+unified-delay: true
+tcp-concurrent: true
+external-controller: 127.0.0.1:9090
+external-ui: ui
+external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+
+geodata-mode: true
+geox-url:
+  geoip: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat"
+  geosite: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
+  mmdb: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb"
+  asn: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb"
+
+find-process-mode: strict
+global-client-fingerprint: chrome
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+
+tun:
+  enable: true
+  stack: mixed
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+
+dns:
+  enable: true
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+    - "*"
+    - "+.lan"
+    - "+.local"
+    - "+.market.xiaomi.com"
+  default-nameserver:
+    - tls://223.5.5.5
+    - tls://223.6.6.6
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+
+proxy-groups:
+
+  - name: Default
+    type: select
+    proxies: [otomatis, DIRECT, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node]
+
+  - name: Google
+    type: select
+    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+
+  - name: Telegram
+    type: select
+    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT, lemot]
+
+  - name: Twitter
+    type: select
+    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+
+  - name: Bilibili
+    type: select
+    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+
+  - name: Bahamut
+    type: select
+    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+
+  - name: YouTube
+    type: select
+    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+
+  - name: NETFLIX
+    type: select
+    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+
+  - name: Spotify
+    type: select
+    proxies:  [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+
+  - name: Github
+    type: select
+    proxies:  [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+
+  - name: domestik
+    type: select
+    proxies:  [DIRECT, Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis]
+
+  - name: lainnya
+    type: select
+    proxies:  [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+
+  #Terpisah, berikut pengelompokan regionalnya
+  - name: Hong Kong
+    type: url-test
+    tolerance: 10
+    include-all: true
+    exclude-filter: provider1
+    exclude-type: direct
+    filter: "(?i)港|hk|hongkong|hong kong"
+
+  - name: Taiwan
+    type: url-test
+    tolerance: 10
+    include-all: true
+    exclude-filter: provider1
+    exclude-type: direct
+    filter: "(?i)台|tw|taiwan"
+
+  - name: Jepang
+    type: url-test
+    tolerance: 10
+    include-all: true
+    exclude-filter: provider1
+    exclude-type: direct
+    filter: "(?i)日|jp|japan"
+
+  - name: Amerika Serikat
+    type: url-test
+    tolerance: 10
+    include-all: true
+    exclude-filter: provider1
+    exclude-type: direct
+    filter: "(?i)美|us|unitedstates|united states"
+
+  - name: Singapura
+    type: url-test
+    tolerance: 10
+    include-all: true
+    exclude-filter: provider1
+    exclude-type: direct
+    filter: "(?i)(新|sg|singapore)"
+
+  - name: Wilayah lain
+    type: select
+    include-all: true
+    exclude-filter: provider1
+    exclude-type: direct
+    filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"
+
+  - name: semua node
+    type: select
+    proxies: [lemot]
+    include-all: true
+    exclude-filter: provider1
+    exclude-type: direct
+
+  - name: otomatis
+    type: url-test
+    include-all: true
+    exclude-type: direct
+    exclude-filter: provider1
+    tolerance: 10
+
+  - name: lemot
+    type: url-test
+    use: [ provider1 ]
+    exclude-type: direct
+    tolerance: 10
+
+rules:
+  - GEOIP,lan,DIRECT,no-resolve
+  - GEOSITE,github,Github
+  - GEOSITE,twitter,Twitter
+  - GEOSITE,youtube,YouTube
+  - GEOSITE,google,Google
+  - GEOSITE,telegram,Telegram
+  - GEOSITE,netflix,NETFLIX
+  - GEOSITE,bilibili,Bilibili
+  - GEOSITE,bahamut,Bahamut
+  - GEOSITE,spotify,Spotify
+  - GEOSITE,geolocation-!cn,lainnya
+
+  - GEOIP,google,Google
+  - GEOIP,netflix,NETFLIX
+  - GEOIP,telegram,Telegram
+  - GEOIP,twitter,Twitter
+  - MATCH,lainnya
