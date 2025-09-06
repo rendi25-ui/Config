@@ -1,2 +1,3 @@
-trojan://c95852ca-fb84-4edf-af9c-587be1cbd738@cp.cloudflare.com:443?path=%2Fwhatever%2Ftrojan-ws&security=tls&host=afk.nathanvpn.pp.ua&type=ws&sni=afk.nathanvpn.pp.ua#Trojan-jannn-GO%2BWS
-trojan://c95852ca-fb84-4edf-af9c-587be1cbd738@cp.cloudflare.com:80?path=/trojan-ws&security=none&host=afk.nathanvpn.pp.ua&type=ws&sni=afk.nathanvpn.pp.ua#Trojan-jannn-NON%2BWS
+trojan://t.me%2Ffoolvpn@cp.cloudflare.com:443?path=%2Ftrojan-udp&security=tls&host=sg1.foolvpn.me&type=ws&sni=sg1.foolvpn.me#trojan%20sg
+trojan://t.me%2Ffoolvpn@cp.cloudflare.com:443?path=%2Ftrojan-udp&security=tls&host=id1.foolvpn.me&type=ws&sni=id1.foolvpn.me#trojan%20id1
+trojan://t.me%2Ffoolvpn@cp.cloudflare.com:443?path=%2Ftrojan-udp&security=tls&host=id2.foolvpn.me&type=ws&sni=id2.foolvpn.me#trojan%20id2
