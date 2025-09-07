@@ -1,20 +1,20 @@
-# url 里填写自己的订阅,名称不能重复
+# url
 proxy-providers:
-  provider1:
+  fool:
     url: "https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml"
     type: http
     interval: 86400
     health-check: {enable: true,url: "https://www.gstatic.com/generate_204",interval: 300}
     override:
-      additional-prefix: "[provider1]"
+      additional-prefix: "[fool]"
 
-  provider3:
+  openproxy:
     url: "https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_BASE64.txt"
     type: http
     interval: 86400
     health-check: {enable: true,url: "https://www.gstatic.com/generate_204",interval: 300}
     override:
-      additional-prefix: "[provider3]"
+      additional-prefix: "[server]"
       dialer-proxy: "lemot"
     exclude-type: vless
 
@@ -84,144 +84,119 @@ dns:
     - "+.local"
     - "+.market.xiaomi.com"
   default-nameserver:
-    - tls://223.5.5.5
-    - tls://223.6.6.6
+    - tls://1.1.1.1
+    - tls://1.0.0.1
   nameserver:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
+    - https://one.one.one.one/dns-query
 
 proxy-groups:
 
   - name: Default
     type: select
-    proxies: [otomatis, DIRECT, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node]
-
-  - name: Google
-    type: select
-    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+    proxies: [otomatis, DIRECT, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node]
 
   - name: Telegram
     type: select
-    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
-
-  - name: Twitter
-    type: select
-    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
-
-  - name: Bilibili
-    type: select
-    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
-
-  - name: Bahamut
-    type: select
-    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+    proxies: [Default, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, udp]
 
   - name: YouTube
     type: select
-    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+    proxies: [Default, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
 
   - name: NETFLIX
     type: select
-    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+    proxies: [Default, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
 
   - name: Spotify
     type: select
-    proxies:  [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
-
-  - name: Github
-    type: select
-    proxies:  [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
-
-  - name: domestik
-    type: select
-    proxies:  [DIRECT, Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis]
+    proxies:  [Default, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
 
   - name: lainnya
     type: select
-    proxies:  [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+    proxies:  [Default, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
 
   #Terpisah, berikut pengelompokan regionalnya
-  - name: Hong Kong
+  - name: hongkong
     type: url-test
     tolerance: 10
+    interval: 300
     include-all: true
-    exclude-filter: provider1
+    exclude-filter: fool
     exclude-type: direct
-    filter: "(?i)港|hk|hongkong|hong kong"
-
-  - name: Taiwan
-    type: url-test
-    tolerance: 10
-    include-all: true
-    exclude-filter: provider1
-    exclude-type: direct
-    filter: "(?i)台|tw|taiwan"
+    filter: "(?i)hk|hongkong|🇭🇰"
 
   - name: Jepang
     type: url-test
     tolerance: 10
+    interval: 300
     include-all: true
-    exclude-filter: provider1
+    exclude-filter: fool
     exclude-type: direct
     filter: "(?i)日|jp|japan"
 
   - name: Amerika Serikat
     type: url-test
     tolerance: 10
+    interval: 300
     include-all: true
-    exclude-filter: provider1
+    exclude-filter: fool
     exclude-type: direct
     filter: "(?i)美|us|unitedstates|united states"
 
   - name: Singapura
     type: url-test
     tolerance: 10
+    interval: 300
     include-all: true
-    exclude-filter: provider1
+    exclude-filter: fool
     exclude-type: direct
-    filter: "(?i)(新|sg|singapore)"
+    filter: "(?i)(新|sg|singapore|🇸🇬|SG)"
 
   - name: Wilayah lain
-    type: select
+    type: url-test
+    tolerance: 10
+    interval: 300
     include-all: true
-    exclude-filter: provider1
+    exclude-filter: fool
     exclude-type: direct
-    filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"
+    filter: "(?i)^(?!.*(?:🇳🇱|🇯🇵|🇺🇸|🇸🇬|🇨🇳|nl|netherland|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"
 
   - name: semua node
     type: select
     include-all: true
-    exclude-filter: provider1
+    exclude-filter: fool
     exclude-type: direct
 
   - name: otomatis
     type: url-test
     include-all: true
     exclude-type: direct
-    exclude-filter: provider1
+    exclude-filter: fool
     tolerance: 10
+    interval: 300
 
   - name: lemot
     type: url-test
-    use: [ provider1 ]
+    use: [ fool ]
     exclude-type: direct
     tolerance: 10
+    interval: 300
+
+  - name: udp
+    type: url-test
+    use: [ openproxy ]
+    exclude-type: direct
+    filter: 🇲🇨|🇮🇩|id|indonesia
+    tolerance: 10
+    interval: 300
 
 rules:
   - GEOIP,lan,DIRECT,no-resolve
-  - GEOSITE,github,Github
-  - GEOSITE,twitter,Twitter
   - GEOSITE,youtube,YouTube
-  - GEOSITE,google,Google
   - GEOSITE,telegram,Telegram
-  - GEOSITE,netflix,NETFLIX
-  - GEOSITE,bilibili,Bilibili
-  - GEOSITE,bahamut,Bahamut
   - GEOSITE,spotify,Spotify
   - GEOSITE,geolocation-!cn,lainnya
-
-  - GEOIP,google,Google
   - GEOIP,netflix,NETFLIX
   - GEOIP,telegram,Telegram
-  - GEOIP,twitter,Twitter
+  - GEOSITE,category-porn,REJECT
   - MATCH,lainnya
