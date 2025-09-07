@@ -1,4 +1,4 @@
-# url 里填写自己的订阅,名称不能重复 node
+# url 里填写自己的订阅,名称不能重复
 proxy-providers:
   provider1:
     url: "https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml"
@@ -102,7 +102,7 @@ proxy-groups:
 
   - name: Telegram
     type: select
-    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT, lemot]
+    proxies: [Default, Hong Kong, Taiwan, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
 
   - name: Twitter
     type: select
