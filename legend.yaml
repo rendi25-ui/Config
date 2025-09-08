@@ -1,4 +1,4 @@
-# url
+# url new
 proxy-providers:
   fool:
     url: "https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml"
@@ -7,6 +7,9 @@ proxy-providers:
     health-check: {enable: true,url: "https://www.gstatic.com/generate_204",interval: 300}
     override:
       additional-prefix: "[fool]"
+      udp: true
+      skip-cert-verify: true
+      udp-over-tcp: true
 
   openproxy:
     url: "https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_BASE64.txt"
@@ -16,6 +19,9 @@ proxy-providers:
     override:
       additional-prefix: "[server]"
       dialer-proxy: "lemot"
+      udp: true
+      skip-cert-verify: true
+      udp-over-tcp: true
     exclude-type: vless
 
 hosts:
@@ -93,27 +99,27 @@ proxy-groups:
 
   - name: Default
     type: select
-    proxies: [otomatis, DIRECT, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node]
+    proxies: [otomatis, DIRECT, taiwan, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node]
 
   - name: Telegram
     type: select
-    proxies: [Default, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, udp]
+    proxies: [Default, semua node, udp]
 
   - name: YouTube
     type: select
-    proxies: [Default, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+    proxies: [Default, taiwan, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
 
   - name: NETFLIX
     type: select
-    proxies: [Default, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+    proxies: [Default, taiwan, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
 
   - name: Spotify
     type: select
-    proxies:  [Default, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+    proxies:  [Default, taiwan, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
 
   - name: lainnya
     type: select
-    proxies:  [Default, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
+    proxies:  [Default, taiwan, hongkong, Jepang, Singapura, Amerika Serikat, Wilayah lain, semua node, otomatis, DIRECT]
 
   #Terpisah, berikut pengelompokan regionalnya
   - name: hongkong
@@ -124,6 +130,7 @@ proxy-groups:
     exclude-filter: fool
     exclude-type: direct
     filter: "(?i)hk|hongkong|🇭🇰"
+    disable-udp: true
 
   - name: Jepang
     type: url-test
@@ -133,6 +140,7 @@ proxy-groups:
     exclude-filter: fool
     exclude-type: direct
     filter: "(?i)日|jp|japan"
+    disable-udp: true
 
   - name: Amerika Serikat
     type: url-test
@@ -142,6 +150,7 @@ proxy-groups:
     exclude-filter: fool
     exclude-type: direct
     filter: "(?i)美|us|unitedstates|united states"
+    disable-udp: true
 
   - name: Singapura
     type: url-test
@@ -151,6 +160,17 @@ proxy-groups:
     exclude-filter: fool
     exclude-type: direct
     filter: "(?i)(新|sg|singapore|🇸🇬|SG)"
+    disable-udp: true
+
+  - name: taiwan
+    type: url-test
+    tolerance: 10
+    interval: 300
+    include-all: true
+    exclude-filter: fool
+    exclude-type: direct
+    filter: "(?i)(tw|taiwan|🇹🇼)"
+    disable-udp: true
 
   - name: Wilayah lain
     type: url-test
@@ -159,7 +179,7 @@ proxy-groups:
     include-all: true
     exclude-filter: fool
     exclude-type: direct
-    filter: "(?i)^(?!.*(?:🇳🇱|🇯🇵|🇺🇸|🇸🇬|🇨🇳|nl|netherland|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"
+    filter: "(?i)^(?!.*(?:hk|hongkong|🇭🇰|🇳🇱|🇯🇵|🇺🇸|🇸🇬|🇨🇳|nl|netherland|日|jp|japan|新|sg|singapore|美|us|unitedstates|tw|taiwan|🇹🇼)).*"
 
   - name: semua node
     type: select
@@ -171,9 +191,10 @@ proxy-groups:
     type: url-test
     include-all: true
     exclude-type: direct
-    exclude-filter: fool
+    exclude-filter: fool|id🇮🇩|🇲🇨|indonesia
     tolerance: 10
     interval: 300
+    disable-udp: true
 
   - name: lemot
     type: url-test
@@ -186,17 +207,26 @@ proxy-groups:
     type: url-test
     use: [ openproxy ]
     exclude-type: direct
-    filter: 🇲🇨|🇮🇩|id|indonesia
-    tolerance: 10
+    filter: 🇲🇨|🇮🇩|id|indonesia|🇳🇱|🇯🇵|🇺🇸|nl|netherland|日|jp|japan|美|us|unitedstates|tw|taiwan|🇹🇼
     interval: 300
+    tolerance: 10
+    disable-udp: false
+
+  - name: x
+    type: select
+    proxies: [ REJECT, PASS ]
 
 rules:
+  - IP-CIDR,127.0.0.0/8,DIRECT
   - GEOIP,lan,DIRECT,no-resolve
   - GEOSITE,youtube,YouTube
   - GEOSITE,telegram,Telegram
   - GEOSITE,spotify,Spotify
-  - GEOSITE,geolocation-!cn,lainnya
+  - GEOIP,id,lainnya
   - GEOIP,netflix,NETFLIX
   - GEOIP,telegram,Telegram
-  - GEOSITE,category-porn,REJECT
+  - NETWORK,udp,udp
+  - GEOSITE,category-porn,x
+  - AND,((NETWORK,UDP),(OR,((DST-PORT,443/80),(GEOSITE,youtube)))),REJECT
+  - AND,((OR,((GEOSITE,instagram),(GEOSITE,facebook))),(NETWORK,UDP)),REJECT
   - MATCH,lainnya
