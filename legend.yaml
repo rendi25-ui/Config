@@ -25,7 +25,7 @@ proxy-providers:
     exclude-type: vless
 
 hosts:
-  'cp.cloudflare.com':
+  'alpha.clash.dev':
   - 104.18.53.42 #byu ilped
   - 104.18.51.6 #byu ilped
   - 104.20.46.147 #xlvidio
