@@ -1,4 +1,4 @@
-# url
+# url udpyt
 proxy-providers:
   fool:
     url: "https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml"
@@ -217,16 +217,12 @@ proxy-groups:
     proxies: [ REJECT, PASS ]
 
 rules:
-  - IP-CIDR,127.0.0.0/8,DIRECT
+  - NETWORK,udp,udp
   - GEOIP,lan,DIRECT,no-resolve
   - GEOSITE,youtube,YouTube
   - GEOSITE,telegram,Telegram
   - GEOSITE,spotify,Spotify
-  - GEOIP,id,lainnya
   - GEOIP,netflix,NETFLIX
   - GEOIP,telegram,Telegram
-  - NETWORK,udp,udp
   - GEOSITE,category-porn,x
-  - AND,((NETWORK,UDP),(OR,((DST-PORT,443/80),(GEOSITE,youtube)))),REJECT
-  - AND,((OR,((GEOSITE,instagram),(GEOSITE,facebook))),(NETWORK,UDP)),REJECT
   - MATCH,lainnya
