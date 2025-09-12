@@ -1,4 +1,4 @@
-# url udplb
+# url udplbx
 proxy-providers:
   fool:
     url: "https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml"
@@ -104,7 +104,7 @@ proxy-groups:
 
   - name: Telegram
     type: select
-    proxies: [Default, semua node, udp]
+    proxies: [Default, semua node, lemot]
 
   - name: YouTube
     type: select
@@ -203,15 +203,6 @@ proxy-groups:
     exclude-type: direct
     strategy: round-robin
     interval: 300
-
-  - name: udp
-    type: url-test
-    use: [ openproxy ]
-    exclude-type: direct
-    filter: 🇲🇨|🇮🇩|id|indonesia|🇳🇱|🇯🇵|🇺🇸|nl|netherland|日|jp|japan|美|us|unitedstates|tw|taiwan|🇹🇼
-    interval: 300
-    tolerance: 10
-    disable-udp: false
 
   - name: x
     type: select
