@@ -1,4 +1,4 @@
-# url udp lb
+# url udplb
 proxy-providers:
   fool:
     url: "https://raw.githubusercontent.com/absurd100/test/refs/heads/main/UDP-bug.yaml"
