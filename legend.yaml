@@ -198,10 +198,10 @@ proxy-groups:
     disable-udp: true
 
   - name: lemot
-    type: url-test
+    type: load-balance
     use: [ fool ]
     exclude-type: direct
-    tolerance: 10
+    strategy: round-robin
     interval: 300
 
   - name: udp
