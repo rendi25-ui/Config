@@ -209,7 +209,7 @@ proxy-groups:
     proxies: [ REJECT, PASS ]
 
 rules:
-  - NETWORK,udp,udp
+  - NETWORK,udp,lemot
   - GEOIP,lan,DIRECT,no-resolve
   - GEOSITE,youtube,YouTube
   - GEOSITE,telegram,Telegram
