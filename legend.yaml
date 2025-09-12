@@ -14,15 +14,16 @@ proxy-providers:
   openproxy:
     url: "https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_BASE64.txt"
     type: http
-    interval: 86400
+    interval: 3600
     health-check: {enable: true,url: "https://www.gstatic.com/generate_204",interval: 300}
     override:
       additional-suffix: "[server]"
-      dialer-proxy: "lemot"
+     # dialer-proxy: "lemot"
       udp: true
       skip-cert-verify: true
       udp-over-tcp: true
     exclude-type: vless
+    proxy: lemot
 
 hosts:
   'alpha.clash.dev':
