@@ -1,1 +1,19 @@
-dHJvamFuOi8vOWE2MWJmNjktY2Y2Ni00MTU1LWI1NjAtODFmZDE3ZDUzZDRlQGJ1Zzo4MD9wYXRoPSUyRnRyb2phbi13cyZzZWN1cml0eT1ub25lJmhvc3Q9dm9oLnBhbnNlci53ZWIuaWQmdHlwZT13cyNJTkRPNS0yLTI2bnRscwp0cm9qYW46Ly85YTYxYmY2OS1jZjY2LTQxNTUtYjU2MC04MWZkMTdkNTNkNGVAYnVnOjQ0Mz9wYXRoPSUyRnRyb2phbi13cyZzZWN1cml0eT10bHMmaG9zdD12b2gucGFuc2VyLndlYi5pZCZ0eXBlPXdzJnNuaT12b2gucGFuc2VyLndlYi5pZCNJTkRPNS0yLTI2dGxz
+proxies:
+- name: SG (UDP)
+  type: vless
+  server: cp.cloudflare.com
+  port: 443
+  uuid: 7fe0b1fa-7b57-46cb-bded-909d0dfb0b50
+  cipher: auto
+  tls: true
+  skip-cert-verify: true
+  servername: ava.game.naver.com.free.jeelsboobz.art
+  network: ws
+  udp: true
+  xudp: true
+  ws-opts:
+    path: /qGZGAPo0xcrZ87n4q
+    headers:
+      Host: ava.game.naver.com.free.jeelsboobz.art
+    v2ray-http-upgrade: true
+    v2ray-http-upgrade-fast-open: true

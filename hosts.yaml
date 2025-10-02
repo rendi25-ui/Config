@@ -1,0 +1,14 @@
+hosts:
+  'nuclear.biz.id': 'cp.cloudflare.com'
+  'worker.my.id': 'cp.cloudflare.com'
+  'worker.biz.id': 'cp.cloudflare.com'
+  'nautica.my.id': 'cp.cloudflare.com'
+  'nuclear.us.kg': 'cp.cloudflare.com'
+  'tcp.biz.id': 'cp.cloudflare.com'
+  'jeelsboobz.biz.id': 'cp.cloudflare.com'
+  'sg1.foolvpn.me': 'cp.cloudflare.com'
+  'id1.foolvpn.me': 'cp.cloudflare.com'
+  'id2.foolvpn.me': 'cp.cloudflare.com'
+  'cp.cloudflare.com':
+  - 104.18.3.2 #tls
+  - 104.18.2.2 #ntls
