@@ -33,6 +33,7 @@ hosts:
   - 172.66.144.39 #xlvidio
   - 104.18.3.2 #wifiid
   - 104.18.2.2 #wifiid
+  - ava.game.naver.jp
 
 mixed-port: 7890
 ipv6: true
